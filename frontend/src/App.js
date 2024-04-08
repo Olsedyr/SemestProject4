@@ -1,7 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useEffect } from 'react';
+import mqttConnect from './mqtt';
 
 function App() {
+  useEffect(() => {
+    mqttConnect();
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
