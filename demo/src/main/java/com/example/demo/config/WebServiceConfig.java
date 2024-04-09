@@ -29,7 +29,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema warehouseSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("WarehousePort");
-        wsdl11Definition.setLocationUri("/ws");
+        wsdl11Definition.setLocationUri("http://localhost:8081/Service.asmx");
         wsdl11Definition.setTargetNamespace("http://example.org/warehouse");
 
         wsdl11Definition.setSchema(warehouseSchema);
@@ -38,6 +38,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         wsdl11Definition.setCreateSoap12Binding(false);
         return wsdl11Definition;
     }
+
 
     @Bean
     public XsdSchema warehouseSchema() {

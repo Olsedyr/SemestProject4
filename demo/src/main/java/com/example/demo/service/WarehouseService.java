@@ -1,10 +1,13 @@
 package com.example.demo.service;
 
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class WarehouseService {
 
     // Method to retrieve inventory data
