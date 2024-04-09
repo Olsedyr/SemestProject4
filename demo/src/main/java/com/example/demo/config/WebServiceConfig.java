@@ -31,6 +31,8 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         wsdl11Definition.setPortTypeName("WarehousePort");
         wsdl11Definition.setLocationUri("/ws");
         wsdl11Definition.setTargetNamespace("http://example.org/warehouse");
+
+        wsdl11Definition.setSchema(warehouseSchema);
         // Disable automatic WSDL generation
         wsdl11Definition.setCreateSoap11Binding(false);
         wsdl11Definition.setCreateSoap12Binding(false);
