@@ -34,7 +34,6 @@ const App = () => {
 
                 <Inventory />
 
-
                 <PrevProd />
 
 
