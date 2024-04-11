@@ -4,12 +4,14 @@ import com.example.demo.service.WarehouseService;
 import com.example.demo.warehouse.InsertItemRequest;
 import com.example.demo.warehouse.GetInventoryResponse;
 import com.example.demo.warehouse.PickItemRequest;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import java.util.List;
 
+@Endpoint
 public class WarehouseEndpoint {
 
     WarehouseService warehouseService = new WarehouseService();
