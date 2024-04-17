@@ -20,7 +20,12 @@ const AgvInfo = () => {
                 const data = response.data;
                 // Update states with response data
                 setBatteryLife(data.battery); 
-                setStatus(data.state === 1 ? "Active" : "Idle");
+                setStatus(
+                    data.state === 1 ? "Idle" : 
+                    data.state === 2 ? "Executing" :
+                    data.state === 3 ? "Charging" :
+                    "Unknown"
+                );
                 setProgram(data['program name']);
                 setTimestamp(data.timestamp);
             })
