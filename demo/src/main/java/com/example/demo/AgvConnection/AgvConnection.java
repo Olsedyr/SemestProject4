@@ -20,8 +20,8 @@ public class AgvConnection {
         return INSTANCE;
     }
 
-    private void setProgram(AgvPrograms program){
-        // Create a HTTP connection
+    public void setProgram(AgvPrograms program){
+        // Create an HTTP connection
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("PUT");
@@ -48,8 +48,8 @@ public class AgvConnection {
         }
     }
 
-    private void startProgram(){
-        // Create a HTTP connection
+    public void startProgram(){
+        // Create an HTTP connection
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("PUT");
@@ -76,7 +76,7 @@ public class AgvConnection {
         }
     }
 
-    private AgvStatus getAgvStatus(){
+    public AgvStatus getAgvStatus(){
         return restTemplate.getForObject(url, AgvStatus.class);
     }
 
@@ -84,7 +84,7 @@ public class AgvConnection {
     public static void main(String[] args) {
         AgvConnection agvConnection = AgvConnection.getInstance();
         //agvConnection.setProgram(AgvPrograms.MoveToStorageOperation);
-        agvConnection.setProgram(AgvPrograms.MoveToStorageOperation);
+        agvConnection.setProgram(AgvPrograms.PickWarehouseOperation);
         agvConnection.startProgram();
         System.out.println(agvConnection.getAgvStatus());
     }
