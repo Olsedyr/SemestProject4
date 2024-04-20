@@ -20,6 +20,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-core</artifactId>
+			<version>6.2.4</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.eclipse.paho</groupId>
 			<artifactId>org.eclipse.paho.client.mqttv3</artifactId>
 			<version>1.2.5</version>
