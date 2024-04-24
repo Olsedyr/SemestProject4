@@ -1,11 +1,10 @@
 package com.example.demo.service;
-import org.eclipse.paho.client.mqttv3.*;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.stereotype.Service;
 
 @Service
 public class AssemblyStationService {
+    /*
 
     @Value("${mqtt.broker}")
     private String broker;
@@ -71,4 +70,6 @@ public class AssemblyStationService {
         // Implement logic to execute operation based on process ID
         System.out.println("Executing operation with process ID: " + processId);
     }
+
+     */
 }

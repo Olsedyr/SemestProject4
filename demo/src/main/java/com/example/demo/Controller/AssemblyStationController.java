@@ -1,16 +1,10 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Assembly.OperationRequest;
-import com.example.demo.service.AssemblyStationService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AssemblyStationController {
-
+/*
     private final AssemblyStationService assemblyStationService;
     private final ObjectMapper objectMapper;
 
@@ -41,4 +35,6 @@ public class AssemblyStationController {
     }
 
     // Other REST endpoints for controlling the assembly station can be defined here
+
+ */
 }
