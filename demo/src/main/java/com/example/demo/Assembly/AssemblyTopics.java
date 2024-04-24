@@ -28,7 +28,6 @@ public class AssemblyTopics {
         String clientId = "your-client-id"; // Unique client ID for your MQTT client
         connectToMQTTBroker();
     }
-
     private void connectToMQTTBroker() {
         try {
             MqttClient mqttClient = new MqttClient(broker, clientId, new MemoryPersistence());
