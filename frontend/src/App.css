@@ -178,3 +178,27 @@ body::before {
     padding: 8px;
 }
 
+.product-catalog {
+    margin-bottom: 20px;
+}
+
+.product-catalog ul {
+    list-style: none;
+    padding: 0;
+}
+
+.product-catalog li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.product-catalog li:hover {
+    background-color: #e0e0e0;
+}
+
+.product-catalog li span {
+    display: block;
+}
