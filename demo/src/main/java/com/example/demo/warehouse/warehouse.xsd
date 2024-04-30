@@ -1,4 +1,25 @@
-<!-- warehouse.xsd -->
+<!-- warehouse.xsd --><!DOCTYPE xs:schema [
+        <!ELEMENT xs:schema (xs:element)*>
+        <!ATTLIST xs:schema
+                xmlns:xs CDATA #REQUIRED
+                xmlns:tns CDATA #REQUIRED
+                targetNamespace CDATA #REQUIRED
+                elementFormDefault CDATA #REQUIRED>
+        <!ELEMENT xs:element (xs:complexType)*>
+        <!ATTLIST xs:element
+                name CDATA #REQUIRED
+                type CDATA #IMPLIED>
+        <!ELEMENT xs:complexType (xs:sequence|xs:simpleContent)*>
+        <!ELEMENT xs:sequence (xs:element)*>
+        <!ELEMENT xs:simpleContent (xs:extension)*>
+        <!ELEMENT xs:extension (xs:attribute)*>
+        <!ATTLIST xs:extension
+                base CDATA #REQUIRED>
+        <!ELEMENT xs:attribute (#PCDATA)>
+        <!ATTLIST xs:attribute
+                name CDATA #REQUIRED
+                type CDATA #REQUIRED>
+        ]>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:tns="http://example.org/warehouse"
            targetNamespace="http://example.org/warehouse"
@@ -27,7 +48,60 @@
                 <xs:element name="Inventory">
                     <xs:complexType>
                         <xs:sequence>
-                            <!-- Define inventory items here -->
+                            <xs:element name="Board">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="quantity" type="xs:integer"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Wheels">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="quantity" type="xs:integer"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Trucks">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="quantity" type="xs:integer"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="KidsBoard">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="quantity" type="xs:integer"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="KidsWheels">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="quantity" type="xs:integer"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="KidsTrucks">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="quantity" type="xs:integer"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -36,5 +110,6 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
 
 </xs:schema>

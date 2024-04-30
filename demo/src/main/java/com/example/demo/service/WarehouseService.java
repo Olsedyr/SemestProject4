@@ -1,25 +1,49 @@
 package com.example.demo.service;
 
+import com.example.demo.repository.TestDBRepository;
+import com.example.demo.warehouse.GetInventoryResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class WarehouseService {
+/*
 
-    // nothing is implemented yet
+    TestDBRepository testDBRepository;
 
-    public WarehouseService() {
+    @Autowired
+    public WarehouseService(TestDBRepository testDBRepository) {
+            this.testDBRepository = testDBRepository;
+        }
 
+    public List<GetInventoryResponse.Inventory> getInventory() {
+        List<GetInventoryResponse.Inventory> inventoryList = testDBRepository.findAll(); // Assuming Inventory is the entity returned by testDBRepository
+
+        // Convert Inventory entities to GetInventoryResponse.Inventory objects
+        List<GetInventoryResponse.Inventory> responseInventoryList = inventoryList.stream()
+                .map(this::convertToResponseInventory)
+                .collect(Collectors.toList());
+
+        return responseInventoryList;
     }
 
-    // Method to get inventory data
-    public List<String> GetInventory() {
+    // Helper method to convert Inventory entity to GetInventoryResponse.Inventory object
+    private GetInventoryResponse.Inventory convertToResponseInventory(GetInventoryResponse.Inventory inventory) {
+        GetInventoryResponse.Inventory responseInventory = new GetInventoryResponse.Inventory();
+        // Set properties of responseInventory based on inventory entity
+        responseInventory.setId(inventory.getId());
+        responseInventory.setName(inventory.getName());
+        // Map other properties as needed
 
-        return null;
+        return responseInventory;
     }
+
+
 
     // Method to get current timestamp
     public String getCurrentTimeStamp() {
@@ -38,4 +62,6 @@ public class WarehouseService {
     public void insertItem(int trayId, String itemName) {
 
     }
+    
+ */
 }

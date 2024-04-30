@@ -11,6 +11,13 @@ import java.time.LocalDateTime;
 @Table(name = "Inventory")
 
 public class testDB {
+    public testDB(String productId, String description, int quantity, LocalDateTime lastUpdated) {
+        this.productId = productId;
+        this.description = description;
+        this.quantity = quantity;
+        this.lastUpdated = lastUpdated;
+    }
+
     //placeholder data to test the configuration of the database
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,4 +25,8 @@ public class testDB {
     private String description;
     private int quantity;
     private LocalDateTime lastUpdated;
+
+    public testDB() {
+
+    }
 }
