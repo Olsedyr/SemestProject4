@@ -1,4 +1,4 @@
-package com.example.demo.endpoint;
+package src.main.java.com.example.demo.endpoint;
 
 import com.example.demo.service.TestDBService;
 import org.springframework.beans.factory.annotation.Autowired;
