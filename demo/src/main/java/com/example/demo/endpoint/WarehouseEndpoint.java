@@ -44,7 +44,6 @@ public class WarehouseEndpoint {
     public GetInventoryResponse GetInventory() {
         GetInventoryResponse response = new GetInventoryResponse();
         response.setState(1);
-        response.setTimeStamp(warehouseService.getCurrentTimeStamp());
         System.out.println(response.toString());
         return response;
     }

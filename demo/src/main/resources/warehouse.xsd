@@ -1,6 +1,14 @@
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://tempuri.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.microsoft.com/ws/06/2004/policy/http" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" targetNamespace="http://tempuri.org/" name="IEmulatorService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-    <wsdl:types>
-        <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+<xs:schema xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+           xmlns:tns="http://example.org/warehouse"
+           xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           xmlns:wsam="http://www.w3.org/1999/xhtml"
+           targetNamespace="http://example.org/warehouse"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           name="IEmulatorService"
+           xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+<wsdl:types>
+        <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" >
             <xs:element name="PickItem">
                 <xs:complexType>
                     <xs:sequence>
@@ -84,28 +92,28 @@
             <xs:attribute name="Id" type="xs:ID" />
             <xs:attribute name="Ref" type="xs:IDREF" />
         </xs:schema>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays"  elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+             />
         </xs:schema>
     </wsdl:types>
     <wsdl:message name="IEmulatorService_PickItem_InputMessage">
-        <wsdl:part name="parameters" element="tns:PickItem" />
+        <xs:part name="parameters" element="tns:PickItem" />
     </wsdl:message>
     <wsdl:message name="IEmulatorService_PickItem_OutputMessage">
-        <wsdl:part name="parameters" element="tns:PickItemResponse" />
+        <xs:part name="parameters" element="tns:PickItemResponse" />
     </wsdl:message>
     <wsdl:message name="IEmulatorService_InsertItem_InputMessage">
-        <wsdl:part name="parameters" element="tns:InsertItem" />
+        <xs:part name="parameters" element="tns:InsertItem" />
     </wsdl:message>
     <wsdl:message name="IEmulatorService_InsertItem_OutputMessage">
-        <wsdl:part name="parameters" element="tns:InsertItemResponse" />
+        <xs:part name="parameters" element="tns:InsertItemResponse" />
     </wsdl:message>
     <wsdl:message name="IEmulatorService_GetInventory_InputMessage">
-        <wsdl:part name="parameters" element="tns:GetInventory" />
+        <xs:part name="parameters" element="tns:GetInventory" />
     </wsdl:message>
-    <wsdl:message name="IEmulatorService_GetInventory_OutputMessage">
-        <wsdl:part name="parameters" element="tns:GetInventoryResponse" />
-    </wsdl:message>
+    <xs:message name="IEmulatorService_GetInventory_OutputMessage">
+        <xs:part name="parameters" element="tns:GetInventoryResponse" />
+    </xs:message>
     <wsdl:portType name="IEmulatorService">
         <wsdl:operation name="PickItem">
             <wsdl:input wsam:Action="http://tempuri.org/IEmulatorService/PickItem" message="tns:IEmulatorService_PickItem_InputMessage" />
@@ -155,4 +163,4 @@
             <soap:address location="http://localhost:8081/Service.asmx" />
         </wsdl:port>
     </wsdl:service>
-</wsdl:definitions>
+</xs:schema>

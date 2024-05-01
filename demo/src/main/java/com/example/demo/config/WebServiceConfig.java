@@ -43,11 +43,14 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         wsdl11Definition.setCreateSoap12Binding(false);
         return wsdl11Definition;
     }
-
+    @Bean
+    public IEmulatorService emulatorService() {
+        return new IEmulatorService(); // Initialize the generated service client
+    }
 
     @Bean
     public XsdSchema warehouseSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("com/example/demo/warehouse/warehouse.xsd"));
+        return new SimpleXsdSchema(new ClassPathResource("warehouse.xsd"));
     }
 
     @Bean
