@@ -31,8 +31,8 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "trayId"
 })
-@XmlRootElement(name = "PickItem", namespace = "http://example.org/warehouse")
-public class PickItemRequest {
+@XmlRootElement(name = "PickItemResponse", namespace = "http://example.org/warehouse")
+public class PickItemResponse {
 
     @XmlElement(namespace = "http://example.org/warehouse")
     protected int trayId;

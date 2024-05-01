@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface TestDBRepository extends JpaRepository<testDB, Integer> {
     // You can define additional custom query methods here if needed
 
+
 }

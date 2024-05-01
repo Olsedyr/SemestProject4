@@ -38,27 +38,75 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link PickItemRequest }
-     * 
-     */
-    public PickItemRequest createPickItemRequest() {
-        return new PickItemRequest();
-    }
-
-    /**
-     * Create an instance of {@link InsertItemRequest }
-     * 
-     */
-    public InsertItemRequest createInsertItemRequest() {
-        return new InsertItemRequest();
-    }
-
-    /**
      * Create an instance of {@link GetInventoryResponse.Inventory }
      * 
      */
     public GetInventoryResponse.Inventory createGetInventoryResponseInventory() {
         return new GetInventoryResponse.Inventory();
+    }
+
+    /**
+     * Create an instance of {@link PickItemResponse }
+     * 
+     */
+    public PickItemResponse createPickItemResponse() {
+        return new PickItemResponse();
+    }
+
+    /**
+     * Create an instance of {@link InsertItemResponse }
+     * 
+     */
+    public InsertItemResponse createInsertItemResponse() {
+        return new InsertItemResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetInventoryResponse.Inventory.Board }
+     * 
+     */
+    public GetInventoryResponse.Inventory.Board createGetInventoryResponseInventoryBoard() {
+        return new GetInventoryResponse.Inventory.Board();
+    }
+
+    /**
+     * Create an instance of {@link GetInventoryResponse.Inventory.Wheels }
+     * 
+     */
+    public GetInventoryResponse.Inventory.Wheels createGetInventoryResponseInventoryWheels() {
+        return new GetInventoryResponse.Inventory.Wheels();
+    }
+
+    /**
+     * Create an instance of {@link GetInventoryResponse.Inventory.Trucks }
+     * 
+     */
+    public GetInventoryResponse.Inventory.Trucks createGetInventoryResponseInventoryTrucks() {
+        return new GetInventoryResponse.Inventory.Trucks();
+    }
+
+    /**
+     * Create an instance of {@link GetInventoryResponse.Inventory.KidsBoard }
+     * 
+     */
+    public GetInventoryResponse.Inventory.KidsBoard createGetInventoryResponseInventoryKidsBoard() {
+        return new GetInventoryResponse.Inventory.KidsBoard();
+    }
+
+    /**
+     * Create an instance of {@link GetInventoryResponse.Inventory.KidsWheels }
+     * 
+     */
+    public GetInventoryResponse.Inventory.KidsWheels createGetInventoryResponseInventoryKidsWheels() {
+        return new GetInventoryResponse.Inventory.KidsWheels();
+    }
+
+    /**
+     * Create an instance of {@link GetInventoryResponse.Inventory.KidsTrucks }
+     * 
+     */
+    public GetInventoryResponse.Inventory.KidsTrucks createGetInventoryResponseInventoryKidsTrucks() {
+        return new GetInventoryResponse.Inventory.KidsTrucks();
     }
 
 }

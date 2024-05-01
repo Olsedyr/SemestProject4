@@ -1,18 +1,15 @@
 package com.example.demo.service;
 
 import com.example.demo.repository.TestDBRepository;
-import com.example.demo.warehouse.GetInventoryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class WarehouseService {
-/*
+
 
     TestDBRepository testDBRepository;
 
@@ -20,28 +17,30 @@ public class WarehouseService {
     public WarehouseService(TestDBRepository testDBRepository) {
             this.testDBRepository = testDBRepository;
         }
-
-    public List<GetInventoryResponse.Inventory> getInventory() {
-        List<GetInventoryResponse.Inventory> inventoryList = testDBRepository.findAll(); // Assuming Inventory is the entity returned by testDBRepository
-
-        // Convert Inventory entities to GetInventoryResponse.Inventory objects
-        List<GetInventoryResponse.Inventory> responseInventoryList = inventoryList.stream()
-                .map(this::convertToResponseInventory)
-                .collect(Collectors.toList());
-
-        return responseInventoryList;
+/*
+    // Assume this method retrieves inventory data from your warehouse
+    public List<GetInventoryResponse.Inventory> retrieveInventoryData() {
+        // Implement logic to retrieve inventory data
+        WarehouseEndpoint
+        // This could be fetching from a database, an external API, or any other data source
     }
 
-    // Helper method to convert Inventory entity to GetInventoryResponse.Inventory object
-    private GetInventoryResponse.Inventory convertToResponseInventory(GetInventoryResponse.Inventory inventory) {
-        GetInventoryResponse.Inventory responseInventory = new GetInventoryResponse.Inventory();
-        // Set properties of responseInventory based on inventory entity
-        responseInventory.setId(inventory.getId());
-        responseInventory.setName(inventory.getName());
-        // Map other properties as needed
 
-        return responseInventory;
+    public GetInventoryResponse.Inventory getInventory() {
+        // Retrieve inventory data from your warehouse
+        List<GetInventoryResponse.Inventory> inventoryData = retrieveInventoryData();
+
+        // Create a new instance of GetInventoryResponse.Inventory
+        GetInventoryResponse.Inventory inventory = new GetInventoryResponse.Inventory();
+
+        // Set the inventory data to the Inventory object
+        inventory.getInventoryItem().addAll(inventoryData);
+
+        // Return the populated Inventory object
+        return inventory;
     }
+
+ */
 
 
 
@@ -61,7 +60,9 @@ public class WarehouseService {
     // Method to handle inserting an item into the warehouse
     public void insertItem(int trayId, String itemName) {
 
+
+
     }
-    
- */
+
+
 }

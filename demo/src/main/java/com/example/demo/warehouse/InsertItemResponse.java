@@ -33,8 +33,8 @@ import jakarta.xml.bind.annotation.XmlType;
     "trayId",
     "name"
 })
-@XmlRootElement(name = "InsertItem", namespace = "http://example.org/warehouse")
-public class InsertItemRequest {
+@XmlRootElement(name = "InsertItemResponse", namespace = "http://example.org/warehouse")
+public class InsertItemResponse {
 
     @XmlElement(namespace = "http://example.org/warehouse")
     protected int trayId;
