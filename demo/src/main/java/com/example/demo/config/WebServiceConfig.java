@@ -1,6 +1,8 @@
 package com.example.demo.config;
 
 
+import com.example.demo.service.WarehouseService;
+import com.example.demo.service.WarehouseServiceClient;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +22,11 @@ import java.util.List;
 @Configuration
 @EnableWs
 public class WebServiceConfig extends WsConfigurerAdapter {
+
+    @Bean
+    public WarehouseService warehouseService() {
+        return new WarehouseServiceClient();
+    }
 
     @Bean
     public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
@@ -42,10 +49,6 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         wsdl11Definition.setCreateSoap11Binding(false);
         wsdl11Definition.setCreateSoap12Binding(false);
         return wsdl11Definition;
-    }
-    @Bean
-    public IEmulatorService emulatorService() {
-        return new IEmulatorService(); // Initialize the generated service client
     }
 
     @Bean

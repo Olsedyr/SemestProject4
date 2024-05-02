@@ -1,5 +1,5 @@
 
-package com.example.demo.warehouse;
+package warehouse;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -18,7 +18,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="trayId" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="GetInventoryResult" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -29,28 +29,36 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "trayId"
+    "getInventoryResult"
 })
-@XmlRootElement(name = "PickItemResponse", namespace = "http://example.org/warehouse")
-public class PickItemResponse {
+@XmlRootElement(name = "GetInventoryResponse")
+public class GetInventoryResponse {
 
-    @XmlElement(namespace = "http://example.org/warehouse")
-    protected int trayId;
+    @XmlElement(name = "GetInventoryResult", required = true, nillable = true)
+    protected String getInventoryResult;
 
     /**
-     * Gets the value of the trayId property.
+     * Gets the value of the getInventoryResult property.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getTrayId() {
-        return trayId;
+    public String getGetInventoryResult() {
+        return getInventoryResult;
     }
 
     /**
-     * Sets the value of the trayId property.
+     * Sets the value of the getInventoryResult property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setTrayId(int value) {
-        this.trayId = value;
+    public void setGetInventoryResult(String value) {
+        this.getInventoryResult = value;
     }
 
 }
