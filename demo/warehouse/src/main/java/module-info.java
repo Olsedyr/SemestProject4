@@ -12,4 +12,5 @@ module warehouse.module {
     requires jakarta.xml.bind;
 
     exports com.example.warehouse;
+    opens com.example.warehouse to spring.beans;
 }
