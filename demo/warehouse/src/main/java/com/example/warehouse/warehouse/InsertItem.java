@@ -18,7 +18,8 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="GetInventoryResult" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="trayId" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -29,36 +30,54 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getInventoryResult"
+    "trayId",
+    "name"
 })
-@XmlRootElement(name = "GetInventoryResponse")
-public class GetInventoryResponse {
+@XmlRootElement(name = "InsertItem")
+public class InsertItem {
 
-    @XmlElement(name = "GetInventoryResult", required = true, nillable = true)
-    protected String getInventoryResult;
+    protected int trayId;
+    @XmlElement(required = true, nillable = true)
+    protected String name;
 
     /**
-     * Gets the value of the getInventoryResult property.
+     * Gets the value of the trayId property.
+     * 
+     */
+    public int getTrayId() {
+        return trayId;
+    }
+
+    /**
+     * Sets the value of the trayId property.
+     * 
+     */
+    public void setTrayId(int value) {
+        this.trayId = value;
+    }
+
+    /**
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getGetInventoryResult() {
-        return getInventoryResult;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Sets the value of the getInventoryResult property.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setGetInventoryResult(String value) {
-        this.getInventoryResult = value;
+    public void setName(String value) {
+        this.name = value;
     }
 
 }
