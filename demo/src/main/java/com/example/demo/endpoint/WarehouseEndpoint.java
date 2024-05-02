@@ -22,7 +22,7 @@ public class WarehouseEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetInventory")
     @ResponsePayload
     public GetInventoryResponse getInventory(@RequestPayload GetInventory request) {
-        // Call the external warehouse service to get the inventory data
+        // Send request to the warehouse (docker container) to get inventory
         GetInventoryResponse response = (GetInventoryResponse) webServiceTemplate.marshalSendAndReceive(WAREHOUSE_ENDPOINT_URL, request);
         return response;
     }
@@ -30,14 +30,14 @@ public class WarehouseEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "PickItem")
     @ResponsePayload
     public PickItemResponse pickItem(@RequestPayload PickItem request) {
-        // Call the external warehouse service to pick the item
+        // Send request to the warehouse (docker container) to pick up an item
         return (PickItemResponse) webServiceTemplate.marshalSendAndReceive(WAREHOUSE_ENDPOINT_URL, request);
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "InsertItem")
     @ResponsePayload
     public InsertItemResponse insertItem(@RequestPayload InsertItem request) {
-        // Call the external warehouse service to insert the item
+        // Send request to the warehouse (docker container) to insert an item
         return (InsertItemResponse) webServiceTemplate.marshalSendAndReceive(WAREHOUSE_ENDPOINT_URL, request);
     }
 }

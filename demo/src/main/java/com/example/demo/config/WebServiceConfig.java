@@ -1,8 +1,6 @@
 package com.example.demo.config;
 
 
-import com.example.demo.service.WarehouseService;
-import com.example.demo.service.WarehouseServiceClient;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -25,11 +23,7 @@ import java.util.List;
 @EnableWs
 public class WebServiceConfig extends WsConfigurerAdapter {
 
-    @Bean
-    public WarehouseService warehouseService() {
-        return new WarehouseServiceClient();
-    }
-
+    // Interface with SOAP methods that simplifies the communication
     @Bean
     public WebServiceTemplate webServiceTemplate(Jaxb2Marshaller marshaller) {
         WebServiceTemplate webServiceTemplate = new WebServiceTemplate();
@@ -38,6 +32,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return webServiceTemplate;
     }
 
+    // Converts java objects to xml and vice versa
     @Bean
     public Jaxb2Marshaller marshaller() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
@@ -46,6 +41,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return marshaller;
     }
 
+    // Defines my endpoint and where the soap request should be sent
     @Bean
     public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
