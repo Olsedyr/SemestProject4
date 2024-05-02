@@ -16,7 +16,7 @@ import java.net.URL;
  *
  */
 @WebServiceClient(name = "IEmulatorService",
-                  wsdlLocation = "file:/C:/Users/nikol/Documents/GitHub/SemestProject4/demo/src/main/java/warehouse/Service.asmx",
+                  wsdlLocation = "demo/warehouse/src/main/java/com/example/warehouse/warehouse/Service.asmx",
                   targetNamespace = "http://tempuri.org/")
 public class IEmulatorService_Service extends Service {
 
@@ -27,11 +27,11 @@ public class IEmulatorService_Service extends Service {
     static {
         URL url = null;
         try {
-            url = new URL("file:/C:/Users/nikol/Documents/GitHub/SemestProject4/demo/src/main/java/warehouse/Service.asmx");
+            url = new URL("demo/warehouse/src/main/java/com/example/warehouse/warehouse/Service.asmx");
         } catch (MalformedURLException e) {
             java.util.logging.Logger.getLogger(IEmulatorService_Service.class.getName())
                 .log(java.util.logging.Level.INFO,
-                     "Can not initialize the default wsdl from {0}", "file:/C:/Users/nikol/Documents/GitHub/SemestProject4/demo/src/main/java/warehouse/Service.asmx");
+                     "Can not initialize the default wsdl from {0}", "demo/warehouse/src/main/java/com/example/warehouse/warehouse/Service.asmx");
         }
         WSDL_LOCATION = url;
     }
