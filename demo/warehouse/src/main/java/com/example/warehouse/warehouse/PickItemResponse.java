@@ -18,7 +18,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="trayId" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="PickItemResult" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -29,28 +29,36 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "trayId"
+    "pickItemResult"
 })
-@XmlRootElement(name = "PickItem", namespace = "http://example.org/warehouse")
-public class PickItemRequest {
+@XmlRootElement(name = "PickItemResponse")
+public class PickItemResponse {
 
-    @XmlElement(namespace = "http://example.org/warehouse")
-    protected int trayId;
+    @XmlElement(name = "PickItemResult", required = true, nillable = true)
+    protected String pickItemResult;
 
     /**
-     * Gets the value of the trayId property.
+     * Gets the value of the pickItemResult property.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getTrayId() {
-        return trayId;
+    public String getPickItemResult() {
+        return pickItemResult;
     }
 
     /**
-     * Sets the value of the trayId property.
+     * Sets the value of the pickItemResult property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setTrayId(int value) {
-        this.trayId = value;
+    public void setPickItemResult(String value) {
+        this.pickItemResult = value;
     }
 
 }

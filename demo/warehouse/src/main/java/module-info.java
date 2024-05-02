@@ -10,7 +10,13 @@ module warehouse.module {
     requires spring.xml;
     requires spring.beans;
     requires jakarta.xml.bind;
+    requires spring.oxm;
+    requires jakarta.xml.ws;
+    requires java.logging;
+    requires jakarta.servlet;
 
     exports com.example.warehouse;
+    exports com.example.warehouse.warehouse;
     opens com.example.warehouse to spring.beans;
+    opens com.example.warehouse.warehouse to spring.beans;
 }

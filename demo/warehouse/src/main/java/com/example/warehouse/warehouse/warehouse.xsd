@@ -1,40 +1,70 @@
-<!-- warehouse.xsd -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:tns="http://example.org/warehouse"
-           targetNamespace="http://example.org/warehouse"
-           elementFormDefault="qualified">
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/" targetNamespace="http://tempuri.org/" elementFormDefault="qualified">
 
-    <xs:element name="PickItemRequest">
+    <!-- Types defined in the WSDL -->
+
+    <!-- PickItem -->
+    <xs:element name="PickItem">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="trayId" type="xs:int"/>
+                <xs:element minOccurs="1" name="trayId" type="xs:int"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="InsertItemRequest">
+    <!-- PickItemResponse -->
+    <xs:element name="PickItemResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="trayId" type="xs:int"/>
-                <xs:element name="name" type="xs:string"/>
+                <xs:element minOccurs="1" name="PickItemResult" nillable="true" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
+    <!-- InsertItem -->
+    <xs:element name="InsertItem">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="1" name="trayId" type="xs:int"/>
+                <xs:element minOccurs="1" name="name" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- InsertItemResponse -->
+    <xs:element name="InsertItemResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="1" name="InsertItemResult" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- GetInventory -->
+    <xs:element name="GetInventory">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- GetInventoryResponse -->
     <xs:element name="GetInventoryResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="Inventory">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <!-- Define inventory items here -->
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="State" type="xs:int"/>
-                <xs:element name="TimeStamp" type="xs:string"/>
+                <xs:element minOccurs="1" name="GetInventoryResult" nillable="true" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
+    <!-- Result elements -->
+
+    <!-- PickItemResult -->
+    <xs:element name="PickItemResult" type="xs:string"/>
+
+    <!-- InsertItemResult -->
+    <xs:element name="InsertItemResult" type="xs:string"/>
+
+    <!-- GetInventoryResult -->
+    <xs:element name="GetInventoryResult" type="xs:string"/>
 
 </xs:schema>
