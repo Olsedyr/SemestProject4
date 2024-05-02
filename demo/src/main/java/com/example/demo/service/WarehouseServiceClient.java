@@ -1,13 +1,9 @@
 package com.example.demo.service;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import warehouse.*;
 
 public class WarehouseServiceClient extends WebServiceGatewaySupport implements WarehouseService {
-
-    @Value("${warehouse.service.endpoint}")
-    private String endpointUrl;
 
     @Override
     public String pickItem(int trayId) {
