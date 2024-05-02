@@ -98,12 +98,7 @@
 			<url>https://repo.eclipse.org/content/repositories/paho-releases/</url>
 		</repository>
 	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>apache-cxf</id>
-			<url>https://repository.apache.org/content/groups/public/</url>
-		</pluginRepository>
-	</pluginRepositories>
+
 
 
 	<build>
