@@ -1,4 +1,4 @@
-package com.example.warehouse;
+package com.example.warehouse.endpoint;
 
 import com.example.warehouse.warehouse.*;
 import org.springframework.beans.factory.annotation.Autowired;
