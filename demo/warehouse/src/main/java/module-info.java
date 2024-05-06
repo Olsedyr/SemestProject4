@@ -14,6 +14,9 @@ module warehouse.module {
     requires jakarta.xml.ws;
     requires java.logging;
     requires jakarta.servlet;
+    requires java.persistence;
+    requires jakarta.persistence;
+    requires org.json;
 
     exports com.example.warehouse.warehouse;
     opens com.example.warehouse to spring.beans;
