@@ -7,14 +7,12 @@ import com.example.warehouse.warehouse.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController()
+@CrossOrigin(origins = "http://localhost:3000") // Allow requests from frontend
 public class WarehouseController {
 
     @Autowired
@@ -25,6 +23,8 @@ public class WarehouseController {
 
     @GetMapping("/viewInventory")
     public List<Inventory> viewInventory(){
+
+        getInventory(new GetInventory());
 
         Pageable pageable = PageRequest.of(0, 10); // Page 0, size 10
         List<Inventory> inventoryList = inventoryRepository.findAllByOrderByTimestamp(pageable);
@@ -39,12 +39,12 @@ public class WarehouseController {
     }
 
     @PostMapping("/pickItem")
-    public PickItemResponse pickItem(@RequestBody PickItem request) {
+    public PickItemResponse pickItem(PickItem request, @RequestParam("trayId") String trayId) {
         return warehouseEndpoint.pickItem(request);
     }
 
     @PostMapping("/insertItem")
-    public InsertItemResponse insertItem(@RequestBody InsertItem request) {
+    public InsertItemResponse insertItem(InsertItem request, @RequestParam("trayId") String trayId, @RequestParam("name") String name) {
         return warehouseEndpoint.insertItem(request);
     }
 }
