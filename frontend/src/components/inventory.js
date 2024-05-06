@@ -3,9 +3,9 @@ import React from 'react';
 const Inventory = () => {
     // placeholder
     const inventoryItems = [
-        { id: 1, name: "Item 1", quantity: 10 },
-        { id: 2, name: "Item 2", quantity: 20 },
-        { id: 3, name: "Item 3", quantity: 15 },
+        { TrayId: 1, name: "Item 1", Timestamp: "12:00"},
+        { TrayId: 2, name: "Item 2", Timestamp: "12:05"},
+        { TrayId: 3, name: "Item 3", Timestamp: "12:10"},
 
     ];
 
@@ -16,17 +16,17 @@ const Inventory = () => {
                 <table className="inventory-table">
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Tray-ID</th>
                         <th>Name</th>
-                        <th>Quantity</th>
+                        <th>TimeStamp</th>
                     </tr>
                     </thead>
                     <tbody>
                     {inventoryItems.map(item => (
                         <tr key={item.id}>
-                            <td>{item.id}</td>
+                            <td>{item.TrayId}</td>
                             <td>{item.name}</td>
-                            <td>{item.quantity}</td>
+                            <td>{item.Timestamp}</td>
                         </tr>
                     ))}
                     </tbody>
