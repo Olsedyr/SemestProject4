@@ -1,4 +1,4 @@
-package com.example.warehouse;
+package com.example.warehouse.config;
 
 
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
