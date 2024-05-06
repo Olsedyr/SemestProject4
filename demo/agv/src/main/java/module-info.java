@@ -6,4 +6,5 @@ module agv.module {
     requires com.fasterxml.jackson.databind;
 
     exports com.example.agv;
+    exports com.example.agv.agvConnection;
 }

@@ -8,7 +8,12 @@ module product.module {
     requires spring.beans;
     requires spring.tx;
     requires jakarta.persistence;
+    requires agv.module;
+    requires assembly.module;
+    requires warehouse.module;
+    requires jakarta.xml.soap;
 
     exports com.example.product;
+    exports com.example.product.service;
 
 }
