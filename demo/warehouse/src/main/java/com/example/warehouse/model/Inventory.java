@@ -53,4 +53,14 @@ public class Inventory {
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
+
+    @Override
+    public String toString() {
+        return "Inventory{" +
+                "id=" + id +
+                ", trayID=" + trayID +
+                ", name='" + name + '\'' +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }

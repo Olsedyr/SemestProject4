@@ -17,6 +17,7 @@ module warehouse.module {
     requires java.persistence;
     requires jakarta.persistence;
     requires org.json;
+    requires spring.data.commons;
 
     exports com.example.warehouse.warehouse;
     opens com.example.warehouse to spring.beans;
