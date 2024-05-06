@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Inventory = () => {
-    // placeholder
-    const inventoryItems = [
-        { TrayId: 1, name: "Item 1", Timestamp: "12:00"},
-        { TrayId: 2, name: "Item 2", Timestamp: "12:05"},
-        { TrayId: 3, name: "Item 3", Timestamp: "12:10"},
+    const [inventoryItems, setInventoryItems] = useState([]);
 
-    ];
+    useEffect(() => {
+        fetchInventoryItems();
+    }, []);
+
+    const fetchInventoryItems = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/viewInventory');
+            setInventoryItems(response.data);
+        } catch (error) {
+            console.error('Error fetching inventory items:', error);
+        }
+    };
 
     return (
         <div className="container">
@@ -24,9 +32,9 @@ const Inventory = () => {
                     <tbody>
                     {inventoryItems.map(item => (
                         <tr key={item.id}>
-                            <td>{item.TrayId}</td>
+                            <td>{item.trayID}</td>
                             <td>{item.name}</td>
-                            <td>{item.Timestamp}</td>
+                            <td>{item.timestamp}</td>
                         </tr>
                     ))}
                     </tbody>
