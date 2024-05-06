@@ -69,6 +69,7 @@
                     <archive>
                         <manifest>
                             <!-- Specify the main class here if needed -->
+                            <mainClass>com.example.warehouse.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
