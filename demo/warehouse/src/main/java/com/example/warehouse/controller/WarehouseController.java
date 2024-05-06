@@ -1,4 +1,4 @@
-package com.example.warehouse;
+package com.example.warehouse.controller;
 
 import com.example.warehouse.endpoint.WarehouseEndpoint;
 import com.example.warehouse.model.Inventory;
