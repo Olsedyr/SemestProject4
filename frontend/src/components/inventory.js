@@ -10,7 +10,7 @@ const Inventory = () => {
 
     const fetchInventoryItems = async () => {
         try {
-            const response = await axios.get('/api/getInventory');
+            const response = await axios.get('http://localhost:8080/viewInventory');
             setInventoryItems(response.data);
         } catch (error) {
             console.error('Error fetching inventory items:', error);
@@ -32,7 +32,7 @@ const Inventory = () => {
                     <tbody>
                     {inventoryItems.map(item => (
                         <tr key={item.id}>
-                            <td>{item.trayId}</td>
+                            <td>{item.trayID}</td>
                             <td>{item.name}</td>
                             <td>{item.timestamp}</td>
                         </tr>
