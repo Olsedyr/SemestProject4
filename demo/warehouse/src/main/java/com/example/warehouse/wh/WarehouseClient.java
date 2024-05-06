@@ -4,14 +4,16 @@ import jakarta.xml.soap.SOAPConnection;
 import jakarta.xml.soap.SOAPException;
 import jakarta.xml.soap.SOAPMessage;
 
-public class SOAPClient {
+import java.util.List;
+
+public class WarehouseClient {
 
 
     SOAPRequestSender sender = new SOAPRequestSender();
     //String url = "http://localhost:8081/Service.asmx";
     String url = "http://localhost:8080/ws/warehouse";
     SOAPConnection connection = WarehouseConnection.getSoapConnection();
-    public SOAPClient() throws SOAPException {
+    public WarehouseClient() throws SOAPException {
     }
 
     public SOAPConnection getConnection() {
@@ -23,6 +25,14 @@ public class SOAPClient {
         SOAPMessage getInventory = sender.sendSOAPRequest(connection, getInventoryMessage, url);
         String result = sender.extractResponse(getInventory);
         System.out.println("GetInventory Response: " + result);
+    }
+
+    public List<String> getInventoryAsNameStrings() throws Exception {
+        GetInventory getInventoryMessage = new GetInventory();
+        SOAPMessage soapMessage = sender.sendSOAPRequest(connection, getInventoryMessage, url);
+        List<String> itemNames = sender.extractInventoryResponse(soapMessage);
+        System.out.println("GetInventory Response: " + itemNames);
+        return itemNames;
     }
 
 
@@ -53,23 +63,23 @@ public class SOAPClient {
     public static void main(String[] args) {
         try {
 
-            SOAPClient soapClient = new SOAPClient();
-            soapClient.emptyAllTrays();
-            soapClient.getInventoryRequest();
+            WarehouseClient warehouseClient = new WarehouseClient();
+            warehouseClient.emptyAllTrays();
+            warehouseClient.getInventoryRequest();
             //soapClient.pickItemRequest(2);
-            soapClient.insertItemRequest(1,"Hej");
-            soapClient.insertItemRequest(2,"med");
-            soapClient.insertItemRequest(3,"dig");
-            soapClient.insertItemRequest(4,"har");
-            soapClient.insertItemRequest(5,"du");
-            soapClient.insertItemRequest(6,"en");
-            soapClient.insertItemRequest(7,"ko");
-            soapClient.insertItemRequest(8,"i");
-            soapClient.insertItemRequest(9,"haven");
-            soapClient.insertItemRequest(10,"?");
+            warehouseClient.insertItemRequest(1,"Bolt");
+            warehouseClient.insertItemRequest(2,"Wheel");
+            warehouseClient.insertItemRequest(3,"Board");
+            warehouseClient.insertItemRequest(4,"Item4");
+            warehouseClient.insertItemRequest(5,"Skateboard 1");
+            warehouseClient.insertItemRequest(6,"Item 6");
+            warehouseClient.insertItemRequest(7,"Item 7");
+            warehouseClient.insertItemRequest(8,"Item 8");
+            warehouseClient.insertItemRequest(9,"Item 9");
+            warehouseClient.insertItemRequest(10,"Item 10");
 
-            soapClient.getInventoryRequest();
-            soapClient.getConnection().close();
+            warehouseClient.getInventoryRequest();
+            warehouseClient.getConnection().close();
 
         } catch (Exception e) {
             e.printStackTrace();
