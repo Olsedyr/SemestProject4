@@ -20,10 +20,10 @@ module warehouse.module {
     requires spring.data.commons;
 
     exports com.example.warehouse.warehouse;
-    opens com.example.warehouse to spring.beans;
     opens com.example.warehouse.warehouse to spring.beans;
     exports com.example.warehouse.config;
     opens com.example.warehouse.config to spring.beans;
     exports com.example.warehouse.endpoint;
     opens com.example.warehouse.endpoint to spring.beans;
+    opens com.example.warehouse.controller to spring.beans;
 }
