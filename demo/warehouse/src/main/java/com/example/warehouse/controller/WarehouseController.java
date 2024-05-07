@@ -1,5 +1,6 @@
 package com.example.warehouse.controller;
 
+import com.example.product.model.RecipePart;
 import com.example.warehouse.endpoint.WarehouseEndpoint;
 import com.example.warehouse.model.Inventory;
 import com.example.warehouse.repository.InventoryRepository;
@@ -9,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController()
@@ -47,4 +50,37 @@ public class WarehouseController {
     public InsertItemResponse insertItem(InsertItem request, @RequestParam("trayId") String trayId, @RequestParam("name") String name) {
         return warehouseEndpoint.insertItem(request);
     }
+
+    @PostConstruct
+    public void pickall(){
+        PickItem request = new PickItem();
+        for (int i = 1; i <= 10; i++) {
+            request.setTrayId(i);
+            warehouseEndpoint.pickItem(request);
+        }
+
+    }
+    @PostConstruct
+    public void fillall(List<RecipePart> recipePartList){
+
+
+        // A list of the class "RecipePart" containing these items should be made, in order to use it for recipes
+
+        List<String> warehouseItems = Arrays.asList("Small Wheels", "Small Trucks", "Small Board", "Medium Wheels", "Medium Trucks",
+                "Medium Board", "Large Wheels", "Large Trucks", "Large Board", "Wheel Bearings");
+
+
+
+        InsertItem request = new InsertItem();
+
+        for (int i = 1; i <= 10; i++) {
+            request.setTrayId(i);
+            // Get the corresponding item for the current tray
+            String itemName = warehouseItems.get(i - 1).toString();
+            request.setName(itemName);
+            warehouseEndpoint.insertItem(request);
+        }
+
+    }
+
 }

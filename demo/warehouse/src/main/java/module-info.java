@@ -18,6 +18,8 @@ module warehouse.module {
     requires jakarta.persistence;
     requires org.json;
     requires spring.data.commons;
+    requires javax.annotation.api;
+    requires product.module;
 
     exports com.example.warehouse.warehouse;
     opens com.example.warehouse.warehouse to spring.beans;

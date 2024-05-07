@@ -10,5 +10,6 @@ module product.module {
     requires jakarta.persistence;
 
     exports com.example.product;
+    exports com.example.product.model;
 
 }
