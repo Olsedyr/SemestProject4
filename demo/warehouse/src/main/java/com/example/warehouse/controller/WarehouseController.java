@@ -1,6 +1,6 @@
 package com.example.warehouse.controller;
 
-import com.example.product.model.RecipePart;
+import com.example.product.model.Part;
 import com.example.warehouse.endpoint.WarehouseEndpoint;
 import com.example.warehouse.model.Inventory;
 import com.example.warehouse.repository.InventoryRepository;
@@ -61,10 +61,10 @@ public class WarehouseController {
 
     }
     @PostConstruct
-    public void fillall(List<RecipePart> recipePartList){
+    public void fillall(List<Part> partList){
 
 
-        // A list of the class "RecipePart" containing these items should be made, in order to use it for recipes
+        // A list of the class "Part" containing these items should be made, in order to use it for recipes
 
         List<String> warehouseItems = Arrays.asList("Small Wheels", "Small Trucks", "Small Board", "Medium Wheels", "Medium Trucks",
                 "Medium Board", "Large Wheels", "Large Trucks", "Large Board", "Wheel Bearings");
@@ -76,7 +76,8 @@ public class WarehouseController {
         for (int i = 1; i <= 10; i++) {
             request.setTrayId(i);
             // Get the corresponding item for the current tray
-            String itemName = warehouseItems.get(i - 1).toString();
+            //String itemName = partList.get(i - 1).toString();
+            String itemName = warehouseItems.get(i - 1);
             request.setName(itemName);
             warehouseEndpoint.insertItem(request);
         }
