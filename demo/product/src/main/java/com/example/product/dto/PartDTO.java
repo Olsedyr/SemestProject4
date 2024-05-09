@@ -4,6 +4,7 @@ package com.example.product.dto;
 // Data Transfer Object (DTO)
 public class PartDTO {
     private String name;
+    private int trayId;
     private String description;
 
 

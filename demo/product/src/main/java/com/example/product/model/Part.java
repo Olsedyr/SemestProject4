@@ -14,6 +14,8 @@ public class Part {
 
     private String name;
 
+    private int trayId;
+
     @OneToMany(mappedBy = "part", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecipePart> recipeParts;
 
