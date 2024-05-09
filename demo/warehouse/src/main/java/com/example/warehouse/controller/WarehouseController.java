@@ -60,7 +60,7 @@ public class WarehouseController {
         }
 
     }
-    @PostConstruct
+    //@PostConstruct
     public void fillall(List<Part> partList){
 
 

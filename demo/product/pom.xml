@@ -46,6 +46,7 @@
                     <archive>
                         <manifest>
                             <!-- Specify the main class here if needed -->
+<!--                            <mainClass>com.example.product.Main</mainClass>-->
                         </manifest>
                     </archive>
                 </configuration>
