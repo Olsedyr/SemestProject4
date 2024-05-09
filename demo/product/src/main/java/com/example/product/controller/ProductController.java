@@ -25,26 +25,6 @@ public class ProductController {
     }
 
 
-//    @PostMapping("/add")
-//    public Product addProduct(@RequestBody ProductDTO productDTO) {
-//        // Map DTO fields to Product entity
-//        String name = productDTO.getName();
-//        String description = productDTO.getDescription();
-//        Recipe recipe = productDTO.getRecipe();
-//
-//        // Extract product name and component quantities from the recipe
-//        String productName = recipe.getProductName();
-//        Map<String, Integer> componentQuantities = new HashMap<>();
-//        for (RecipeComponent component : recipe.getRecipeComponents()) {
-//            componentQuantities.put(component.getComponent().getName(), component.getQuantity());
-//        }
-//
-//        // Save the recipe first
-//        Recipe savedRecipe = recipeService.addRecipe(productName, componentQuantities);
-//
-//        // Add product using ProductService
-//        return productService.addProduct(name, description, savedRecipe);
-//    }
 
     @PostMapping("/add")
     public Product addProduct(@RequestBody ProductDTO productDTO) {
