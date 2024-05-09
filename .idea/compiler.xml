@@ -7,17 +7,26 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="assembly" />
         <module name="main-app" />
-        <module name="agv" />
-        <module name="product" />
+        <module name="product (2)" />
+        <module name="product (1)" />
+        <module name="agv (2)" />
+        <module name="assembly (2)" />
+        <module name="assembly (1)" />
         <module name="warehouse" />
+        <module name="agv (1)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Agv" target="21" />
+      <module name="agv" target="21" />
+      <module name="agv.test" target="21" />
+      <module name="assembly" target="21" />
       <module name="Assembly" target="21" />
+      <module name="assembly.test" target="21" />
       <module name="MainApp" target="21" />
+      <module name="product" target="21" />
+      <module name="product.Test" target="21" />
       <module name="products" target="21" />
       <module name="Warehouse" target="21" />
     </bytecodeTargetLevel>
@@ -29,10 +38,19 @@
       <module name="MainApp" options="-parameters" />
       <module name="Warehouse" options="-parameters" />
       <module name="agv" options="-parameters" />
+      <module name="agv (1)" options="-parameters" />
+      <module name="agv (2)" options="-parameters" />
+      <module name="agv.test" options="-parameters" />
       <module name="assembly" options="-parameters" />
+      <module name="assembly (1)" options="-parameters" />
+      <module name="assembly (2)" options="-parameters" />
+      <module name="assembly.test" options="-parameters" />
       <module name="demo" options="-parameters" />
       <module name="main-app" options="-parameters" />
       <module name="product" options="-parameters" />
+      <module name="product (1)" options="-parameters" />
+      <module name="product (2)" options="-parameters" />
+      <module name="product.Test" options="-parameters" />
       <module name="warehouse" options="-parameters" />
     </option>
   </component>
