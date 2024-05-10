@@ -12,6 +12,7 @@
         <module name="agv" />
         <module name="product" />
         <module name="warehouse" />
+        <module name="Production" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -27,6 +28,7 @@
       <module name="Agv" options="-parameters" />
       <module name="Assembly" options="-parameters" />
       <module name="MainApp" options="-parameters" />
+      <module name="Production" options="-parameters" />
       <module name="Warehouse" options="-parameters" />
       <module name="agv" options="-parameters" />
       <module name="assembly" options="-parameters" />

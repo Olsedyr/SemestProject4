@@ -14,6 +14,14 @@ public class Part {
 
     private String name;
 
+    public int getTrayId() {
+        return trayId;
+    }
+
+    public void setTrayId(int trayId) {
+        this.trayId = trayId;
+    }
+
     private int trayId;
 
     @OneToMany(mappedBy = "part", cascade = CascadeType.ALL, orphanRemoval = true)

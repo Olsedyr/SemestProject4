@@ -13,5 +13,6 @@ module product.module {
     exports com.example.product.model;
     exports com.example.product.dto;
     exports com.example.product.repository;
+    exports com.example.product.service;
 
 }

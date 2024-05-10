@@ -1,6 +1,5 @@
 package com.example.warehouse.controller;
 
-import com.example.product.model.Part;
 import com.example.warehouse.endpoint.WarehouseEndpoint;
 import com.example.warehouse.model.Inventory;
 import com.example.warehouse.repository.InventoryRepository;
@@ -60,8 +59,9 @@ public class WarehouseController {
         }
 
     }
-    //@PostConstruct
-    public void fillall(List<Part> partList){
+
+    @PostConstruct
+    public void fillall(){
 
 
         // A list of the class "Part" containing these items should be made, in order to use it for recipes

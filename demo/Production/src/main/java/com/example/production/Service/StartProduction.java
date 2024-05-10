@@ -1,8 +1,11 @@
 package com.example.production.Service;
 
+import com.example.product.model.Product;
 import com.example.production.Service.States.AgvPickParts;
 import com.example.production.Service.States.AgvToWarehouse;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StartProduction {
 
 //    State 0: Start med at kør AGV til warehouse (done)
@@ -11,9 +14,11 @@ public class StartProduction {
 //    State 3: Sætte delene i assembly station (Kim)
 //    State 4: Assembly station skal samle (Oliver)
 //    State 5: Gem i database “recipe, timestamp, succes” (Oliver)
+
+
     boolean isFinished=false;
     int state = 0;
-    public void startProduction(String productName) {
+    public void startProduction(Product product) {
 
         while (isFinished == false) {
 
@@ -28,7 +33,7 @@ public class StartProduction {
                     }
                     break;
                 case 1:
-                    if (agvPickParts.agvPickPart(agvPickParts.getPartList(productName)) == true) {
+                    if (agvPickParts.agvPickPart(agvPickParts.getPartList(product)) == true) {
                         state++;
                         System.out.println("state 0 finished");
                     }
