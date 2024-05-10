@@ -70,13 +70,10 @@ public class WarehouseController {
                 "Medium Board", "Large Wheels", "Large Trucks", "Large Board", "Wheel Bearings");
 
 
-
         InsertItem request = new InsertItem();
 
         for (int i = 1; i <= 10; i++) {
             request.setTrayId(i);
-            // Get the corresponding item for the current tray
-            //String itemName = partList.get(i - 1).toString();
             String itemName = warehouseItems.get(i - 1);
             request.setName(itemName);
             warehouseEndpoint.insertItem(request);

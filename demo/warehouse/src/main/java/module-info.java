@@ -29,4 +29,5 @@ module warehouse.module {
     opens com.example.warehouse.endpoint to spring.beans;
     opens com.example.warehouse.controller to spring.beans;
     exports com.example.warehouse.controller;
+    exports com.example.warehouse.repository;
 }

@@ -6,14 +6,14 @@ import com.example.agv.agvConnection.AgvStatus;
 import com.example.product.model.Product;
 import com.example.product.model.RecipePart;
 import com.example.production.Service.ProductionStates;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // State 1
 // Nikolaj
-@Component
+@Service
 public class AgvPickParts extends ProductionStates {
 
     AgvConnection agvConnection = AgvConnection.getInstance();
@@ -23,30 +23,27 @@ public class AgvPickParts extends ProductionStates {
     }
 
 
-    public List<String> getPartList(Product product){
+    public List<Integer> getPartList(Product product){
 
-        System.out.println(product.toString());
+        System.out.println("Start production of: " + product.toString());
 
-
+        // From the chosen product, a list will be made of alle the parts needed based on the product's recipe
         List<RecipePart> recipeParts = product.getRecipe().getRecipeParts();
 
-        List<String> partList = new ArrayList<>();
+        List<Integer> partList = new ArrayList<>();
         for (RecipePart recipePart : recipeParts) {
-            partList.add(String.valueOf(recipePart.getPart().getTrayId()));
+
+            partList.add(recipePart.getPart().getTrayId());
+            System.out.println("AGV just picked up: " + recipePart.getPart().getName());
         }
         return partList;
     }
 
-//    public int getTrayIdForPart(String partName) {
-//        return partRepository.findTrayIdByPartName(partName);
-//    }
 
 
-    public boolean agvPickPart(List<String> partList) {
+    public boolean agvPickPart(List<Integer> partList) {
         agvConnection.setProgram(AgvPrograms.PickWarehouseOperation);
         agvConnection.startProgram();
-
-
 
 
         while (true) {

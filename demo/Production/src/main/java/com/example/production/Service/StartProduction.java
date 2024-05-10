@@ -35,7 +35,7 @@ public class StartProduction {
                 case 1:
                     if (agvPickParts.agvPickPart(agvPickParts.getPartList(product)) == true) {
                         state++;
-                        System.out.println("state 0 finished");
+                        System.out.println("state 1 finished");
                     }
                     break;
                 case 2:
