@@ -1,15 +1,15 @@
 -- Insert parts
 INSERT INTO part (name, tray_Id, description)
 VALUES ('Small Wheel', 1, 'Wheel used for small skateboard'),
-       ('Small Truck', 5, 'Truck used for small skateboard'),
-       ('Small Board', 8, 'Board used for small skateboard'),
-       ('Medium Wheel', 2, 'Wheel used for medium skateboard'),
-       ('Medium Truck', 6, 'Truck used for medium skateboard'),
-       ('Medium Board', 9, 'Board used for medium skateboard'),
-       ('Large Wheel', 3, 'Wheel used for large skateboard'),
-       ('Large Truck', 7, 'Truck used for large skateboard'),
-       ('Large Board', 10, 'Board used for large skateboard'),
-       ('Wheel Bearing', 4, 'Bearing used in skateboard wheels');
+       ('Small Truck', 2, 'Truck used for small skateboard'),
+       ('Small Board', 3, 'Board used for small skateboard'),
+       ('Medium Wheel', 4, 'Wheel used for medium skateboard'),
+       ('Medium Truck', 5, 'Truck used for medium skateboard'),
+       ('Medium Board', 6, 'Board used for medium skateboard'),
+       ('Large Wheel', 7, 'Wheel used for large skateboard'),
+       ('Large Truck', 8, 'Truck used for large skateboard'),
+       ('Large Board', 9, 'Board used for large skateboard'),
+       ('Wheel Bearing', 10, 'Bearing used in skateboard wheels');
 
 -- Insert products with no recipes
 INSERT INTO product (name, description)

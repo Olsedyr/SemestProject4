@@ -6,6 +6,7 @@ module Production {
     requires spring.web;
     requires spring.beans;
     requires spring.context;
+    requires spring.tx;
 
 
     exports com.example.production;

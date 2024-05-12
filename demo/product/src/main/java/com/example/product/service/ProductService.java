@@ -11,13 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ProductService {
 
-    private final ProductRepository productRepository;
-    private final RecipeRepository recipeRepository;
+    @Autowired
+    public ProductRepository productRepository;
+    @Autowired
+    public RecipeRepository recipeRepository;
 
     @Autowired
     public ProductService(ProductRepository productRepository, RecipeRepository recipeRepository) {
         this.productRepository = productRepository;
         this.recipeRepository = recipeRepository;
+    }
+    public ProductService(){
+
     }
 
     @Transactional
@@ -33,4 +38,6 @@ public class ProductService {
         // Save the product to the database
         return productRepository.save(product);
     }
+
 }
+

@@ -12,6 +12,6 @@ public interface InventoryRepository extends JpaRepository<Inventory, Long> {
 
     List<Inventory> findAllByOrderByTimestamp(Pageable pageable);
 
-
+    void deleteInventoryByTrayID(int trayID);
 
 }

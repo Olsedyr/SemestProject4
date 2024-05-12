@@ -15,6 +15,7 @@ public class AgvToWarehouse extends ProductionStates {
     public boolean moveAgvToWarehouse() {
         agvConnection.setProgram(AgvPrograms.MoveToStorageOperation);
         agvConnection.startProgram();
+        System.out.println("Program started: Move AVG to Warehouse" );
 
         while (true) {
             AgvStatus status = agvConnection.getAgvStatus();
@@ -22,6 +23,7 @@ public class AgvToWarehouse extends ProductionStates {
 
             // Check if the AGV is in the desired state with the correct program
             if ("MoveToStorageOperation".equals(status.getProgramName()) && status.getState() == 1) {
+                System.out.println("Program finished: AGV successfully moved to Warehouse" );
                 return true; // Exit loop and method successfully if conditions are met
             }
 

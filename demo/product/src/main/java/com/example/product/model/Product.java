@@ -2,8 +2,6 @@ package com.example.product.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 public class Product {
     @Id
@@ -21,6 +19,11 @@ public class Product {
     public Product(String name, Recipe recipe) {
         this.name = name;
         this.recipe = recipe;
+    }
+
+    public Product(String name) {
+        this.name = name;
+
     }
 
     public String getName() {

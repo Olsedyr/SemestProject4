@@ -1,6 +1,5 @@
 package com.example.warehouse.controller;
 
-import com.example.product.model.Part;
 import com.example.warehouse.endpoint.WarehouseEndpoint;
 import com.example.warehouse.model.Inventory;
 import com.example.warehouse.repository.InventoryRepository;
@@ -51,8 +50,8 @@ public class WarehouseController {
         return warehouseEndpoint.insertItem(request);
     }
 
-    @PostConstruct
-    public void pickall(){
+
+    public void pickAll(){
         PickItem request = new PickItem();
         for (int i = 1; i <= 10; i++) {
             request.setTrayId(i);
@@ -60,8 +59,9 @@ public class WarehouseController {
         }
 
     }
-    //@PostConstruct
-    public void fillall(List<Part> partList){
+
+    @GetMapping("/fillAll")
+    public void fillAll(){
 
 
         // A list of the class "Part" containing these items should be made, in order to use it for recipes
@@ -70,18 +70,23 @@ public class WarehouseController {
                 "Medium Board", "Large Wheels", "Large Trucks", "Large Board", "Wheel Bearings");
 
 
-
         InsertItem request = new InsertItem();
 
         for (int i = 1; i <= 10; i++) {
             request.setTrayId(i);
-            // Get the corresponding item for the current tray
-            //String itemName = partList.get(i - 1).toString();
             String itemName = warehouseItems.get(i - 1);
             request.setName(itemName);
             warehouseEndpoint.insertItem(request);
         }
 
     }
+
+    // Only one @PostConstruct annotated method
+    @PostConstruct
+    public void postConstruct(){
+        pickAll();
+        fillAll();
+    }
+
 
 }
