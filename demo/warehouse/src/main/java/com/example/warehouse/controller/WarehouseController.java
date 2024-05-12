@@ -50,8 +50,8 @@ public class WarehouseController {
         return warehouseEndpoint.insertItem(request);
     }
 
-    @PostConstruct
-    public void pickall(){
+
+    public void pickAll(){
         PickItem request = new PickItem();
         for (int i = 1; i <= 10; i++) {
             request.setTrayId(i);
@@ -60,8 +60,8 @@ public class WarehouseController {
 
     }
 
-    @PostConstruct
-    public void fillall(){
+    @GetMapping("/fillAll")
+    public void fillAll(){
 
 
         // A list of the class "Part" containing these items should be made, in order to use it for recipes
@@ -80,5 +80,13 @@ public class WarehouseController {
         }
 
     }
+
+    // Only one @PostConstruct annotated method
+    @PostConstruct
+    public void postConstruct(){
+        pickAll();
+        fillAll();
+    }
+
 
 }
