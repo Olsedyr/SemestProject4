@@ -1,8 +1,7 @@
 package com.example.production.Service;
 
 import com.example.product.model.Product;
-import com.example.production.Service.States.AgvPickParts;
-import com.example.production.Service.States.AgvToWarehouse;
+import com.example.production.Service.States.*;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,36 +23,50 @@ public class StartProduction {
 
             AgvToWarehouse agvToWarehouse = new AgvToWarehouse();
             AgvPickParts agvPickParts = new AgvPickParts();
+            AgvToAssembly agvToAssembly = new AgvToAssembly();
+            AgvToCharger agvToCharger = new AgvToCharger();
+            AgvPutAssembly agvPutAssembly = new AgvPutAssembly();
 
             switch (state) {
                 case 0:
+                    agvToCharger.moveAgvToCharger(50);
                     if (agvToWarehouse.moveAgvToWarehouse() == true) {
                         state++;
                         System.out.println("state 0 finished");
                     }
                     break;
                 case 1:
+                    agvToCharger.moveAgvToCharger(5);
                     if (agvPickParts.agvPickPart(agvPickParts.getPartList(product)) == true) {
                         state++;
                         System.out.println("state 1 finished");
                     }
                     break;
                 case 2:
-                    state++;
-                    System.out.println("state 2 finished");
+                    agvToCharger.moveAgvToCharger(10);
+                    if (agvToAssembly.moveAgvToAssembly() == true) {
+                        state++;
+                        System.out.println("state 2 finished");
+                    }
                     break;
                 case 3:
-                    state++;
-                    System.out.println("state 3 finished");
+                    agvToCharger.moveAgvToCharger(10);
+                    if (agvPutAssembly.agvPutPart(agvPutAssembly.getPartList(product)) == true) {
+                        state++;
+                        System.out.println("state 3 finished");
+                    }
                     break;
                 case 4:
+                    agvToCharger.moveAgvToCharger(10);
                     state++;
                     System.out.println("state 4 finished");
                     break;
                 case 5:
+
                     isFinished = true;
                     System.out.println("state 5 finished");
                     System.out.println("Production done");
+                    agvToCharger.moveAgvToCharger(50);
                     break;
             }
 

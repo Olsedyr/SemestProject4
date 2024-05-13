@@ -10,8 +10,10 @@ import com.example.warehouse.endpoint.WarehouseEndpoint;
 import com.example.warehouse.repository.InventoryRepository;
 import com.example.warehouse.warehouse.PickItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -47,8 +49,13 @@ public class ProductionController {
     @PostMapping("/add")
     public void addProduction(@RequestParam String name) {
         Product product = productRepository.findByName(name);
+
+        // Check if product is found
+        if (product == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found with name: " + name);
+        }
+
         StartProduction startProduction = new StartProduction();
         startProduction.startProduction(product);
-
     }
 }

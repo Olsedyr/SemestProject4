@@ -4,24 +4,34 @@ import com.example.agv.agvConnection.AgvConnection;
 import com.example.agv.agvConnection.AgvPrograms;
 import com.example.agv.agvConnection.AgvStatus;
 import com.example.production.Service.ProductionStates;
+import org.springframework.stereotype.Service;
 
-//State 2
-public class AgvToAssembly extends ProductionStates {
+// State 0
+@Service
+public class AgvToCharger extends ProductionStates {
+
     AgvConnection agvConnection = AgvConnection.getInstance();
 
-    public boolean moveAgvToAssembly() {
-        agvConnection.setProgram(AgvPrograms.MoveToAssemblyOperation);
+
+    public boolean moveAgvToCharger(int batteryPercentage) {
+        AgvStatus status = agvConnection.getAgvStatus();
+        // Skip the charging phase if status.getBattery() > batteryPercentage
+        if (status.getBattery() > batteryPercentage){
+            System.out.println("Battery level is sufficient, skipping charging phase" );
+            return true;
+        }
+        agvConnection.setProgram(AgvPrograms.MoveToChargerOperation);
         agvConnection.startProgram();
-        System.out.println("Program started: Move AVG to Assembly Station" );
+        System.out.println("Program started: Move AVG to Charging Station" );
         int attempts = 0;  // Added to prevent infinite loops
 
         while (attempts<20) {
-            AgvStatus status = agvConnection.getAgvStatus();
+            status = agvConnection.getAgvStatus();
             System.out.println(status);
-            attempts++;
+
             // Check if the AGV is in the desired state with the correct program
-            if ("MoveToAssemblyOperation".equals(status.getProgramName()) && status.getState() == 1) {
-                System.out.println("Program finished: AGV successfully moved to assembly Station" );
+            if ("MoveToChargerOperation".equals(status.getProgramName()) && status.getState() == 1 && status.getBattery()==100) {
+                System.out.println("Program finished: AGV is fully charged" );
                 return true; // Exit loop and method successfully if conditions are met
             }
             attempts++;
@@ -36,4 +46,7 @@ public class AgvToAssembly extends ProductionStates {
         }
         return false;
     }
+
+
+
 }

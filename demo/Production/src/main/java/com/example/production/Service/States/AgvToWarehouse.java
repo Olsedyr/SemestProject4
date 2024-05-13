@@ -16,8 +16,9 @@ public class AgvToWarehouse extends ProductionStates {
         agvConnection.setProgram(AgvPrograms.MoveToStorageOperation);
         agvConnection.startProgram();
         System.out.println("Program started: Move AVG to Warehouse" );
+        int attempts = 0;  // Added to prevent infinite loops
 
-        while (true) {
+        while (attempts<20) {
             AgvStatus status = agvConnection.getAgvStatus();
             System.out.println(status);
 
@@ -26,6 +27,7 @@ public class AgvToWarehouse extends ProductionStates {
                 System.out.println("Program finished: AGV successfully moved to Warehouse" );
                 return true; // Exit loop and method successfully if conditions are met
             }
+            attempts++;
 
             // a delay to prevent spamming the AGV with status requests
             try {
@@ -35,6 +37,7 @@ public class AgvToWarehouse extends ProductionStates {
                 return false; // Exit if the thread is interrupted
             }
         }
+        return false;
     }
 
 
