@@ -10,8 +10,10 @@ import com.example.warehouse.endpoint.WarehouseEndpoint;
 import com.example.warehouse.repository.InventoryRepository;
 import com.example.warehouse.warehouse.PickItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -37,6 +39,9 @@ public class ProductionController {
     @Autowired
     private WarehouseController warehouseController;
 
+    @Autowired
+    StartProduction startProduction;
+
 
     @Autowired
     public ProductionController(AgvPickParts agvPickParts, AgvToWarehouse agvToWarehouse) {
@@ -44,11 +49,15 @@ public class ProductionController {
         this.agvToWarehouse = agvToWarehouse;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/start")
     public void addProduction(@RequestParam String name) {
         Product product = productRepository.findByName(name);
-        StartProduction startProduction = new StartProduction();
-        startProduction.startProduction(product);
 
+        // Check if product is found
+        if (product == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found with name: " + name);
+        }
+
+        startProduction.startProduction(product);
     }
 }
