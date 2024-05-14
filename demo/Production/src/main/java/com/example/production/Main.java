@@ -22,8 +22,5 @@ public class Main {
 //        startProduction.startProduction();
 
 
-        // Move to charger
-        AgvToCharger agvToCharger = new AgvToCharger();
-        agvToCharger.moveAgvToCharger(100);
     }
 }

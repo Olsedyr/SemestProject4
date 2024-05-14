@@ -39,6 +39,9 @@ public class ProductionController {
     @Autowired
     private WarehouseController warehouseController;
 
+    @Autowired
+    StartProduction startProduction;
+
 
     @Autowired
     public ProductionController(AgvPickParts agvPickParts, AgvToWarehouse agvToWarehouse) {
@@ -46,7 +49,7 @@ public class ProductionController {
         this.agvToWarehouse = agvToWarehouse;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/start")
     public void addProduction(@RequestParam String name) {
         Product product = productRepository.findByName(name);
 
@@ -55,7 +58,6 @@ public class ProductionController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found with name: " + name);
         }
 
-        StartProduction startProduction = new StartProduction();
         startProduction.startProduction(product);
     }
 }
