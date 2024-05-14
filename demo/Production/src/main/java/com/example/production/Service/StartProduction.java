@@ -45,7 +45,7 @@ public class StartProduction {
     SaveToDB saveToDB;
     @Autowired
     AssembleProduct assembleProduct;
-    int state = 4;
+    int state = 0;
 
 
     public void startProduction(Product product) {
