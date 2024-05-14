@@ -41,12 +41,14 @@ public class StartProduction {
     AgvToCharger agvToCharger;
     @Autowired
     AgvPutAssembly agvPutAssembly;
+    @Autowired
+    SaveToDB saveToDB;
     int state = 0;
 
 
     public void startProduction(Product product) {
 
-        Batch batch = addBatchToDB(product);
+        Batch batch = saveToDB.addBatchToDB(product);
 
 
         while (isFinished == false) {
@@ -103,6 +105,7 @@ public class StartProduction {
                     isFinished = true;
                     System.out.println("state 5 finished");
                     System.out.println("Production done");
+                    batch.setCompleted(true);
                     agvToCharger.moveAgvToCharger(50, batch);
                     break;
             }
@@ -110,18 +113,6 @@ public class StartProduction {
         }
         state = 0;
         isFinished = false;
-    }
-
-
-    public Batch addBatchToDB(Product product) {
-
-        Batch batch = new Batch();
-        List<Product> productList = new ArrayList<>();
-        productList.add(product);
-        batch.setProducts(productList);
-        batchRepository.save(batch);
-        return batch;
-
     }
 
 }
