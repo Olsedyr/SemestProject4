@@ -104,7 +104,6 @@ public class StartProduction {
                     System.out.println("state 4 finished");
                     break;
                 case 5:
-
                     isFinished = true;
                     System.out.println("state 5 finished");
                     System.out.println("Production done");

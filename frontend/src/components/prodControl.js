@@ -30,7 +30,7 @@ const ProdControl = () => {
 
     const handleStartProduction = () => {
         // Start production logic here
-        console.log(`Starting production of ${quantity} ${selectedProduct.description}(s)`);
+        console.log(`Starting production of ${quantity} ${selectedProduct.name}(s)`);
 
         // Move AGV to warehouse
         controlAgvProgram('move-to-storage');
@@ -38,9 +38,9 @@ const ProdControl = () => {
 
     // Product data
     const products = [
-        { id: 1, description: "Product A", quantity: 10},
-        { id: 2, description: "Product B", quantity: 12},
-        { id: 3, description: "Product C", quantity: 10}
+        { id: 1, name: "Small skateboard", description: "A small-sized skateboard suitable for children"},
+        { id: 2, name: "Medium skateboad", description: "A medium-sized skateboard"},
+        { id: 3, name: "Large skateboard", description: "A large-sized skateboard"}
     ];
 
     return (
@@ -52,7 +52,7 @@ const ProdControl = () => {
                     <ul>
                         {products.map(product => (
                             <li key={product.id} onClick={() => handleProductSelection(product)}>
-                                {product.description} - {product.quantity}
+                                {product.name} - {product.description}
                             </li>
                         ))}
                     </ul>

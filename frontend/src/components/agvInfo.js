@@ -60,14 +60,6 @@ const AgvInfo = () => {
                     <div className="timestamp-text">Timestamp: {timestamp}</div>
                     <br/>
                     {/* Buttons to control AGV program */}
-                    <button className="button" onClick={() => controlAgvProgram('move-to-charger')}>Move to Charger</button> 
-                    <button className="button" onClick={() => controlAgvProgram('move-to-assembly')}>Move to Assembly Station</button> 
-                    <button className="button" onClick={() => controlAgvProgram('move-to-storage')}>Move to Warehouse</button> 
-                    <br/>
-                    <button className="button" onClick={() => controlAgvProgram('put-assembly')}>Put Assembly</button> 
-                    <button className="button" onClick={() => controlAgvProgram('pick-assembly')}>Pick Assembly</button> 
-                    <button className="button" onClick={() => controlAgvProgram('pick-warehouse')}>Pick Warehouse</button> 
-                    <button className="button" onClick={() => controlAgvProgram('put-warehouse')}>Put Warehouse</button>
                 </div>
             </div>
         </div>
