@@ -1,14 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
 
 const PrevProd = () => {
-    // placeholder data
-    const previousProductions = [
-        { id: 1, product: "Product A", quantity: 100, date: "2023-01-01", additionalInfo: "Additional info for Product A" },
-        { id: 2, product: "Product B", quantity: 150, date: "2023-01-05", additionalInfo: "Additional info for Product B" },
-        { id: 3, product: "Product C", quantity: 200, date: "2023-01-10", additionalInfo: "Additional info for Product C" },
-    ];
-
-    // keep track of the currently selected production ID
+    // Initialize state with an empty array
+    const [previousProductions, setPreviousProductions] = useState([]);
     const [selectedId, setSelectedId] = useState(null);
 
     // Function to toggle the selected production ID
@@ -16,10 +11,26 @@ const PrevProd = () => {
         setSelectedId(selectedId === id ? null : id);
     };
 
+    // Fetch data from the backend when the component mounts
+    useEffect(() => {
+        axios.get('http://localhost:8080/api/production/previousProductions')
+            .then(response => {
+                // Check if the response data is an array
+                if (Array.isArray(response.data)) {
+                    setPreviousProductions(response.data);
+                } else {
+                    console.error('Response data is not an array:', response.data);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching previous productions:', error);
+            });
+    }, []);
+
     return (
         <div className="container">
             <div className="prev-production">
-                <h2>Previous Productions</h2>
+                <h2>Previous 10 Productions</h2>
                 <table className="prev-production-table">
                     <thead>
                     <tr>
@@ -36,7 +47,7 @@ const PrevProd = () => {
                                 <td>{prod.id}</td>
                                 <td>{prod.product}</td>
                                 <td>{prod.quantity}</td>
-                                <td>{prod.date}</td>
+                                <td>{new Date(prod.date).toLocaleDateString()}</td>
                             </tr>
                             {selectedId === prod.id && (
                                 <tr>

@@ -8,6 +8,7 @@ module product.module {
     requires spring.beans;
     requires spring.tx;
     requires jakarta.persistence;
+    requires spring.data.commons;
 
     exports com.example.product;
     exports com.example.product.model;
