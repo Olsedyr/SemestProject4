@@ -22,12 +22,6 @@ public class RecipeController {
 
 
 
-//    @PostMapping("/add")
-//    public Recipe addRecipe(@RequestBody Map<String, Object> requestBody) {
-//        String productName = (String) requestBody.get("productName");
-//        Map<String, Integer> componentQuantities = (Map<String, Integer>) requestBody.get("componentQuantities");
-//        return recipeService.addRecipe(productName, componentQuantities);
-//    }
 
     @PostMapping("/add")
     public Recipe addRecipe(@RequestBody RecipeDTO recipeDTO) {

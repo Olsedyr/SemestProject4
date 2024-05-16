@@ -48,9 +48,9 @@ public class Batch {
         this.log = "";
     }
 
-//    public List<Product> getProducts() {
-//        return products;
-//    }
+    public List<Product> getProducts() {
+        return products;
+    }
 
     public void setProducts(List<Product> products) {
         this.products = products;
@@ -79,4 +79,6 @@ public class Batch {
     public void appendToLogNoTimeStamp(String message) {
         this.log += message + "\n";
     }
+
+
 }

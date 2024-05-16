@@ -1,9 +1,12 @@
 package com.example.product.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
 public class RecipePart {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,9 +14,11 @@ public class RecipePart {
 
     @ManyToOne
     @JoinColumn(name = "recipe_id")
+    @JsonBackReference // Prevents the serialization of the back part of the reference
     private Recipe recipe;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "part_id")
     private Part part;
 

@@ -1,5 +1,7 @@
 package com.example.product.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,12 +14,13 @@ public class Recipe {
     private Long id;
 
     @OneToOne(optional = true)
+    @JsonBackReference
     private Product product;
     private String productName;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference // Handles serialization on the forward part of the reference
     private List<RecipePart> recipeParts;
-
 
     public Recipe(String productName, List<RecipePart> recipeParts) {
         this.productName = productName;

@@ -52,6 +52,7 @@ const PrevProd = () => {
                         <th>ID</th>
                         <th>Completed</th>
                         <th>Created At</th>
+                        <th>Products</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,6 +62,7 @@ const PrevProd = () => {
                                 <td>{batch.id}</td>
                                 <td>{batch.completed ? 'Yes' : 'No'}</td>
                                 <td>{formatDate(batch.createdAt)}</td>
+                                <td>{batch.products.map(product => product.name).join(', ')}</td>
                             </tr>
                             {selectedId === batch.id && (
                                 <tr>

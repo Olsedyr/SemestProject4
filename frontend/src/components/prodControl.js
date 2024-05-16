@@ -33,9 +33,10 @@ const ProdControl = () => {
     // Product data
     const products = [
         { id: 1, name: "Small skateboard", description: "A small-sized skateboard suitable for children"},
-        { id: 2, name: "Medium skateboad", description: "A medium-sized skateboard"},
+        { id: 2, name: "Medium skateboard", description: "A medium-sized skateboard"},
         { id: 3, name: "Large skateboard", description: "A large-sized skateboard"}
     ];
+    
 
     return (
         <div className="container">

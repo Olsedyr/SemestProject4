@@ -4,6 +4,14 @@ import java.util.Map;
 
 public class ProductDTO {
 
+    public ProductDTO() {
+    }
+    public ProductDTO(String name, String description, Map<String, Integer> componentQuantities, Map<String, String> componentDescriptions) {
+        this.name = name;
+        this.description = description;
+        this.componentQuantities = componentQuantities;
+        this.componentDescriptions = componentDescriptions;
+    }
     private String name;
     private String description;
     private Map<String, Integer> componentQuantities;
