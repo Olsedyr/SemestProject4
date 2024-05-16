@@ -6,5 +6,6 @@ module assembly.module {
     requires com.fasterxml.jackson.databind;
     requires org.eclipse.paho.client.mqttv3;
 
+    opens com.example.assembly to com.fasterxml.jackson.databind;
     exports com.example.assembly;
 }

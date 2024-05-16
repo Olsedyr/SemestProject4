@@ -45,6 +45,10 @@ public class Batch {
         this.log = "";
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public List<Product> getProducts() {
         return products;
     }

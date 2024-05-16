@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // State 1
-// Nikolaj
+
 @Service
 public class AgvPickParts extends ProductionStates {
 
