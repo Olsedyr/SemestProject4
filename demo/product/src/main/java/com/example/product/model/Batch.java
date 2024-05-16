@@ -15,10 +15,9 @@ public class Batch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @OneToMany
-//    private List<Product> products;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "batch_products",
             joinColumns = @JoinColumn(name = "batch_id"),
@@ -43,10 +42,6 @@ public class Batch {
     public Batch() {
         this.createdAt=LocalDateTime.now();
         this.log = "";
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public List<Product> getProducts() {
