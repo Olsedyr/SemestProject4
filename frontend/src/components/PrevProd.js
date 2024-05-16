@@ -26,7 +26,20 @@ const PrevProd = () => {
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        return isNaN(date) ? 'Invalid Date' : date.toLocaleDateString();
+        if (isNaN(date)) return 'Invalid Date';
+
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+
+        const formattedDate = date.toLocaleDateString(undefined, options);
+
+        return `${formattedDate}`;
     };
 
     return (

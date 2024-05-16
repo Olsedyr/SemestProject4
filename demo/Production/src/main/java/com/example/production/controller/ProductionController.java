@@ -68,13 +68,8 @@ public class ProductionController {
     }
 
     @GetMapping("/previousProductions")
-    public List<Batch> viewPreviousProductions(){
-
+    public List<Batch> viewPreviousProductions() {
         Pageable pageable = PageRequest.of(0, 10); // Page 0, size 10
-
-        List<Batch> batchList = batchRepository.findAllByOrderByCreatedAt(pageable);
-
-        return batchList;
-
+        return batchRepository.findAllByOrderByCreatedAtDesc(pageable);
     }
 }

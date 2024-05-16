@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface BatchRepository extends JpaRepository<Batch,Long> {
 
-    List<Batch> findAllByOrderByCreatedAt(Pageable pageable);
+    List<Batch> findAllByOrderByCreatedAtDesc(Pageable pageable);
+
 }
