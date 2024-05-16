@@ -30,6 +30,10 @@ public class Batch {
     @Column(columnDefinition = "TEXT")
     private String log;
 
+    public Long getId() {
+        return id;
+    }
+
     public String getLog() {
         return log;
     }
