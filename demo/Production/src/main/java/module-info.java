@@ -7,6 +7,7 @@ module Production {
     requires spring.beans;
     requires spring.context;
     requires spring.tx;
+    requires spring.data.commons;
 
 
     exports com.example.production;

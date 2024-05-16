@@ -1,46 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const PrevProd = () => {
-    // placeholder data
-    const previousProductions = [
-        { id: 1, product: "Product A", quantity: 100, date: "2023-01-01", additionalInfo: "Additional info for Product A" },
-        { id: 2, product: "Product B", quantity: 150, date: "2023-01-05", additionalInfo: "Additional info for Product B" },
-        { id: 3, product: "Product C", quantity: 200, date: "2023-01-10", additionalInfo: "Additional info for Product C" },
-    ];
-
-    // keep track of the currently selected production ID
+    const [previousProductions, setPreviousProductions] = useState([]);
     const [selectedId, setSelectedId] = useState(null);
 
-    // Function to toggle the selected production ID
     const toggleSelectedId = (id) => {
         setSelectedId(selectedId === id ? null : id);
+    };
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/api/production/previousProductions')
+            .then(response => {
+                console.log('Response data:', response.data);  // Log the response data
+                if (Array.isArray(response.data)) {
+                    setPreviousProductions(response.data);
+                } else {
+                    console.error('Response data is not an array:', response.data);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching previous productions:', error);
+            });
+    }, []);
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        if (isNaN(date)) return 'Invalid Date';
+
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+
+        const formattedDate = date.toLocaleDateString(undefined, options);
+
+        return `${formattedDate}`;
     };
 
     return (
         <div className="container">
             <div className="prev-production">
-                <h2>Previous Productions</h2>
+                <h2>Previous 10 Productions</h2>
                 <table className="prev-production-table">
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Date</th>
+                        <th>Completed</th>
+                        <th>Created At</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {previousProductions.map(prod => (
-                        <React.Fragment key={prod.id}>
-                            <tr onClick={() => toggleSelectedId(prod.id)}>
-                                <td>{prod.id}</td>
-                                <td>{prod.product}</td>
-                                <td>{prod.quantity}</td>
-                                <td>{prod.date}</td>
+                    {previousProductions.map(batch => (
+                        <React.Fragment key={batch.id}>
+                            <tr onClick={() => toggleSelectedId(batch.id)}>
+                                <td>{batch.id}</td>
+                                <td>{batch.completed ? 'Yes' : 'No'}</td>
+                                <td>{formatDate(batch.createdAt)}</td>
                             </tr>
-                            {selectedId === prod.id && (
+                            {selectedId === batch.id && (
                                 <tr>
-                                    <td colSpan="4">{prod.additionalInfo}</td>
+                                    <td colSpan="3">{batch.log}</td>
                                 </tr>
                             )}
                         </React.Fragment>
