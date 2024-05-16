@@ -43,6 +43,8 @@ public class StartProduction {
     AgvPutAssembly agvPutAssembly;
     @Autowired
     SaveToDB saveToDB;
+    @Autowired
+    AssembleProduct assembleProduct;
     int state = 0;
 
 
@@ -97,11 +99,11 @@ public class StartProduction {
                     break;
                 case 4:
                     agvToCharger.moveAgvToCharger(10, batch);
+                    assembleProduct.executeAssemblyProgram(1);
                     state++;
                     System.out.println("state 4 finished");
                     break;
                 case 5:
-
                     isFinished = true;
                     System.out.println("state 5 finished");
                     System.out.println("Production done");
@@ -109,10 +111,8 @@ public class StartProduction {
                     agvToCharger.moveAgvToCharger(50, batch);
                     break;
             }
-
         }
         state = 0;
         isFinished = false;
     }
-
 }
