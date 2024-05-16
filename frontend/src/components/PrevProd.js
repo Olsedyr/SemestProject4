@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import axios from 'axios';
 
 const PrevProd = () => {
-    // Initialize state with an empty array
     const [previousProductions, setPreviousProductions] = useState([]);
     const [selectedId, setSelectedId] = useState(null);
 
-    // Function to toggle the selected production ID
     const toggleSelectedId = (id) => {
         setSelectedId(selectedId === id ? null : id);
     };
 
-    // Fetch data from the backend when the component mounts
     useEffect(() => {
         axios.get('http://localhost:8080/api/production/previousProductions')
             .then(response => {
-                // Check if the response data is an array
+                console.log('Response data:', response.data);  // Log the response data
                 if (Array.isArray(response.data)) {
                     setPreviousProductions(response.data);
                 } else {
@@ -27,6 +24,11 @@ const PrevProd = () => {
             });
     }, []);
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return isNaN(date) ? 'Invalid Date' : date.toLocaleDateString();
+    };
+
     return (
         <div className="container">
             <div className="prev-production">
@@ -35,23 +37,21 @@ const PrevProd = () => {
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Date</th>
+                        <th>Completed</th>
+                        <th>Created At</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {previousProductions.map(prod => (
-                        <React.Fragment key={prod.id}>
-                            <tr onClick={() => toggleSelectedId(prod.id)}>
-                                <td>{prod.id}</td>
-                                <td>{prod.product}</td>
-                                <td>{prod.quantity}</td>
-                                <td>{new Date(prod.date).toLocaleDateString()}</td>
+                    {previousProductions.map(batch => (
+                        <React.Fragment key={batch.id}>
+                            <tr onClick={() => toggleSelectedId(batch.id)}>
+                                <td>{batch.id}</td>
+                                <td>{batch.completed ? 'Yes' : 'No'}</td>
+                                <td>{formatDate(batch.createdAt)}</td>
                             </tr>
-                            {selectedId === prod.id && (
+                            {selectedId === batch.id && (
                                 <tr>
-                                    <td colSpan="4">{prod.additionalInfo}</td>
+                                    <td colSpan="3">{batch.log}</td>
                                 </tr>
                             )}
                         </React.Fragment>
