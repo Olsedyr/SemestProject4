@@ -6,9 +6,6 @@ import PrevProd from './components/PrevProd';
 import ProdControl from './components/prodControl';
 import ProdPdf from './components/prodPdf';
 import AgvInfo from "./components/agvInfo";
-import AssemblyInfo from "./components/assemblyInfo";
-import WarehouseInfo from "./components/warehouseInfo";
-
 
 
 
@@ -23,10 +20,6 @@ const App = () => {
             <div className="dashboard">
 
                 <AgvInfo />
-
-                <AssemblyInfo />
-
-                <WarehouseInfo />
 
                 <ProdControl />
 

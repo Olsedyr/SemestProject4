@@ -4,36 +4,30 @@ import axios from 'axios';
 const ProdControl = () => {
     // State variables to keep track of selected product and quantity
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const [quantity, setQuantity] = useState(1);
-    const [program, setProgram] = useState("");
 
     // Function to handle product selection
     const handleProductSelection = (product) => {
         setSelectedProduct(product);
     };
 
-    // Function to handle quantity change
-    const handleQuantityChange = (event) => {
-        setQuantity(parseInt(event.target.value));
-    };
 
     // Function to control AGV program
-    const controlAgvProgram = (programName) => {
-        axios.put(`http://localhost:8080/agv/program/${programName}`)
+    const controlProduction = () => {
+        axios.post(`http://localhost:8080/api/production/start?name=${selectedProduct.name}`)
             .then(response => {
-                console.log(`AGV program set to ${programName}`);
+                console.log(`Producing ${selectedProduct.name}`);
             })
             .catch(error => {
-                console.error(`Error setting AGV program to ${programName}:`, error);
+                console.error(`Error producing ${selectedProduct.name}:`, error);
             });
     };
 
     const handleStartProduction = () => {
         // Start production logic here
-        console.log(`Starting production of ${quantity} ${selectedProduct.name}(s)`);
+        console.log(`Starting production of ${selectedProduct.name}`);
 
         // Move AGV to warehouse
-        controlAgvProgram('move-to-storage');
+        controlProduction();
     };
 
     // Product data
@@ -63,15 +57,6 @@ const ProdControl = () => {
                         <div>
                             <p>{selectedProduct.description}</p>
 
-                            <label htmlFor="quantity">Quantity:</label>
-                            <input
-                                type="number"
-                                id="quantity"
-                                name="quantity"
-                                min="1"
-                                value={quantity}
-                                onChange={handleQuantityChange}
-                            />
                             <br></br>
                             <br></br>
                             <button className="button" onClick={handleStartProduction}>Start Production</button>
