@@ -19,7 +19,7 @@ import java.util.List;
 // State 3
 @Service
 public class AgvPutAssembly extends ProductionStates {
-    // Kim
+
     @Autowired
     BatchRepository batchRepository;
     AgvConnection agvConnection = AgvConnection.getInstance();

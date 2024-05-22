@@ -99,7 +99,9 @@ public class StartProduction {
                     break;
                 case 4:
                     agvToCharger.moveAgvToCharger(10, batch);
-                    assembleProduct.executeAssemblyProgram(1);
+                    ProductionStatus productionStatus4 = assembleProduct.executeAssemblyProgram(batch);
+                    batch.appendToLogNoTimeStamp(productionStatus4.getLog());
+                    batchRepository.save(batch);
                     state++;
                     System.out.println("state 4 finished");
                     break;

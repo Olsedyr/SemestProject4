@@ -60,7 +60,7 @@ public class AgvToCharger extends ProductionStates {
                 return productionStatus; // Exit if the thread is interrupted
             }
         }
-        productionStatus.setCompletedWithoutError(true);
+        productionStatus.setCompletedWithoutError(false);
         return productionStatus;
     }
 

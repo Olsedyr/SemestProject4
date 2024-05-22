@@ -1,6 +1,8 @@
 package com.example.product.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -25,6 +27,7 @@ public class Part {
     private int trayId;
 
     @OneToMany(mappedBy = "part", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private List<RecipePart> recipeParts;
 
     @Column(nullable = true,length = 1_000)

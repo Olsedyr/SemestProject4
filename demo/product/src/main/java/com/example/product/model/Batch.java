@@ -4,6 +4,8 @@ package com.example.product.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Batch {
@@ -13,21 +15,24 @@ public class Batch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @OneToMany
-//    private List<Product> products;
 
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name = "batch_products",
-//            joinColumns = @JoinColumn(name = "batch_id"),
-//            inverseJoinColumns = @JoinColumn(name = "product_id")
-//    )
-//    private List<Product> products = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "batch_products",
+            joinColumns = @JoinColumn(name = "batch_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products = new ArrayList<>();
 
     private LocalDateTime createdAt;
     private boolean completed;
     @Column(columnDefinition = "TEXT")
     private String log;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getLog() {
         return log;
@@ -43,13 +48,13 @@ public class Batch {
         this.log = "";
     }
 
-//    public List<Product> getProducts() {
-//        return products;
-//    }
-//
-//    public void setProducts(List<Product> products) {
-//        this.products = products;
-//    }
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
@@ -74,4 +79,6 @@ public class Batch {
     public void appendToLogNoTimeStamp(String message) {
         this.log += message + "\n";
     }
+
+
 }

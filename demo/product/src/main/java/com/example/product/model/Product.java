@@ -1,5 +1,6 @@
 package com.example.product.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -11,6 +12,7 @@ public class Product {
     private Long id;
     private String name;
     @OneToOne(optional = true)
+    @JsonManagedReference
     private Recipe recipe;
     @Column(nullable = true,length = 1_000)
     private String description;
@@ -26,6 +28,10 @@ public class Product {
     public Product(String name) {
         this.name = name;
 
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {

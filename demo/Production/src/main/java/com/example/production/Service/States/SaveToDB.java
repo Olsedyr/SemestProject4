@@ -21,7 +21,7 @@ public class SaveToDB {
         Batch batch = new Batch();
         List<Product> productList = new ArrayList<>();
         productList.add(product);
-//        batch.setProducts(productList);
+        batch.setProducts(productList);
         batchRepository.save(batch);
         return batch;
     }

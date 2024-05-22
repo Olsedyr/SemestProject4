@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class ProductService {
 
@@ -32,11 +34,14 @@ public class ProductService {
         product.setName(name);
         product.setDescription(description);
         product.setRecipe(recipe);
-        recipe.setProduct(product);
+//        recipe.setProduct(product);
         recipeRepository.save(recipe);
 
         // Save the product to the database
         return productRepository.save(product);
+    }
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 
 }
