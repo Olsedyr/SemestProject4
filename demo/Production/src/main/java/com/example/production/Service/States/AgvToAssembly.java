@@ -1,19 +1,19 @@
 package com.example.production.Service.States;
 
-import com.example.agv.agvConnection.AgvConnection;
 import com.example.agv.agvConnection.AgvPrograms;
 import com.example.agv.agvConnection.AgvStatus;
-import com.example.product.model.Batch;
+import com.example.agv.agvConnection.IAgvConnectionService;
 import com.example.product.repository.BatchRepository;
 import com.example.production.ProductionStatus;
-import com.example.production.Service.ProductionStates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 //State 2
 @Service
-public class AgvToAssembly extends ProductionStates {
-    AgvConnection agvConnection = AgvConnection.getInstance();
+public class AgvToAssembly {
+    @Autowired
+    IAgvConnectionService agvConnection;
+
     @Autowired
     BatchRepository batchRepository;
     ProductionStatus productionStatus = new ProductionStatus(false);

@@ -1,26 +1,29 @@
 package com.example.agv.agvConnection;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class AgvConnection {
+@Service
+public class AgvConnection implements IAgvConnectionService {
 
     private static final AgvConnection INSTANCE = new AgvConnection();
     private final String url = "http://localhost:8082/v1/status/";
     private final RestTemplate restTemplate;
 
     private AgvConnection() {
-        this.restTemplate = new RestTemplate();;
+        this.restTemplate = new RestTemplate();
     }
 
     public static AgvConnection getInstance() {
         return INSTANCE;
     }
 
-    public void setProgram(AgvPrograms program){
+    @Override
+    public void setProgram(AgvPrograms program) {
         // Create an HTTP connection
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
@@ -32,7 +35,7 @@ public class AgvConnection {
 
             // HTTP request body
             String input;
-            input = "{\"Program name\":\""+program.value+"\", \"state\":1}";
+            input = "{\"Program name\":\"" + program.value + "\", \"state\":1}";
 
             // Send the request
             connection.getOutputStream().write(input.getBytes());
@@ -43,12 +46,13 @@ public class AgvConnection {
                 System.err.println(responseCode);
             }
             connection.disconnect();
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void startProgram(){
+    @Override
+    public void startProgram() {
         // Create an HTTP connection
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
@@ -71,12 +75,13 @@ public class AgvConnection {
                 System.err.println(responseCode);
             }
             connection.disconnect();
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public AgvStatus getAgvStatus(){
+    @Override
+    public AgvStatus getAgvStatus() {
         return restTemplate.getForObject(url, AgvStatus.class);
     }
 

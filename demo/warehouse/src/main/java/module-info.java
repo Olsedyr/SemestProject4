@@ -30,4 +30,5 @@ module warehouse.module {
     opens com.example.warehouse.controller to spring.beans;
     exports com.example.warehouse.controller;
     exports com.example.warehouse.repository;
+    exports com.example.warehouse.service;
 }

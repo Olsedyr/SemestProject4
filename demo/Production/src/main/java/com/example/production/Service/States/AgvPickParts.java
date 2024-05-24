@@ -1,39 +1,31 @@
 package com.example.production.Service.States;
 
-import com.example.agv.agvConnection.AgvConnection;
 import com.example.agv.agvConnection.AgvPrograms;
 import com.example.agv.agvConnection.AgvStatus;
-import com.example.product.model.Batch;
+import com.example.agv.agvConnection.IAgvConnectionService;
 import com.example.product.model.Part;
 import com.example.product.model.Product;
 import com.example.product.model.RecipePart;
 import com.example.product.repository.BatchRepository;
 import com.example.production.ProductionStatus;
-import com.example.production.Service.ProductionStates;
-import com.example.warehouse.controller.WarehouseController;
-import com.example.warehouse.endpoint.WarehouseEndpoint;
+import com.example.warehouse.service.IWarehouseService;
+import com.example.warehouse.warehouse.PickItemResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 // State 1
 
 @Service
-public class AgvPickParts extends ProductionStates {
-
-    AgvConnection agvConnection = AgvConnection.getInstance();
+public class AgvPickParts {
+    @Autowired
+    IAgvConnectionService agvConnection;
     @Autowired
     BatchRepository batchRepository;
+    @Autowired
+    IWarehouseService warehouseService;
+
     ProductionStatus productionStatus = new ProductionStatus(false);
 
     public AgvPickParts() {
@@ -64,7 +56,19 @@ public class AgvPickParts extends ProductionStates {
             System.out.println("Starting picking operation for " + part.getName() + " at tray: " + part.getTrayId());
             productionStatus.appendToLog("Starting picking operation for " + part.getName() + " at tray: " + part.getTrayId());
 
-            pickItem(String.valueOf(part.getTrayId())); //  Pick part from warehouse at trayId
+            // Warehouse pick item request
+            PickItemResponse response = warehouseService.pickItem(String.valueOf(part.getTrayId()));
+            System.out.println(response.getPickItemResult());
+            if (response.getPickItemResult().equals("Received pick operation.")) {
+                //success
+                System.out.println("Warehouse: part successfully picked at trayId " + part.getTrayId());
+                productionStatus.appendToLog("Warehouse: part successfully picked at trayId " + part.getTrayId());
+            } else {
+                System.out.println("Warehouse: Failed to pick " + part.getName() + " at tray ID: " + part.getTrayId());
+                productionStatus.appendToLog("Warehouse: Failed to pick " + part.getName() + " at tray ID: " + part.getTrayId());
+                productionStatus.setCompletedWithoutError(false);
+                return productionStatus;
+            }
 
             boolean partPicked = false;
             int attempts = 0;  // Added to prevent infinite loops
@@ -99,65 +103,11 @@ public class AgvPickParts extends ProductionStates {
                 return productionStatus;
             }
         }
-        fillAll(); // Refill warehouse
+        warehouseService.fillAll(); // Refill warehouse
 
         productionStatus.setCompletedWithoutError(true);
         return productionStatus;  // All parts were picked successfully
     }
 
-
-    public void pickItem(String trayId) {
-        try {
-            URL url = new URL("http://localhost:8080/pickItem");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            connection.setRequestMethod("POST");
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
-            // Write parameters to the request body
-            String postData = "trayId=" + trayId;
-            try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
-                wr.writeBytes(postData);
-                wr.flush();
-            }
-
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                System.out.println("Warehouse: part successfully picked at trayId " + trayId);
-                productionStatus.appendToLog("Warehouse: part successfully picked at trayId " + trayId);
-
-            } else {
-                System.out.println("Failed to pick part at warehouse: HTTP status " + responseCode);
-                productionStatus.appendToLog("Failed to pick part at warehouse: HTTP status " + responseCode);
-
-            }
-
-            connection.disconnect();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error during communication with the server.");
-            productionStatus.appendToLog("Error during communication with the server.");
-
-        }
-    }
-
-    private void fillAll() {
-        try {
-            URL url = new URL("http://localhost:8080/fillAll");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.disconnect();
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                System.out.println("Trays have automatically been filled (NO QUANTITY YET)");
-            } else {
-                System.out.println("Failed to fill warehouse: HTTP status " + responseCode);
-            }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 }

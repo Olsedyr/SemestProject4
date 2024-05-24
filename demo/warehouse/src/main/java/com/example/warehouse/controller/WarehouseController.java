@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.PostConstruct;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController()
@@ -49,44 +46,5 @@ public class WarehouseController {
     public InsertItemResponse insertItem(InsertItem request, @RequestParam("trayId") String trayId, @RequestParam("name") String name) {
         return warehouseEndpoint.insertItem(request);
     }
-
-
-    public void pickAll(){
-        PickItem request = new PickItem();
-        for (int i = 1; i <= 10; i++) {
-            request.setTrayId(i);
-            warehouseEndpoint.pickItem(request);
-        }
-
-    }
-
-    @GetMapping("/fillAll")
-    public void fillAll(){
-
-
-        // A list of the class "Part" containing these items should be made, in order to use it for recipes
-
-        List<String> warehouseItems = Arrays.asList("Small Wheels", "Small Trucks", "Small Board", "Medium Wheels", "Medium Trucks",
-                "Medium Board", "Large Wheels", "Large Trucks", "Large Board", "Wheel Bearings");
-
-
-        InsertItem request = new InsertItem();
-
-        for (int i = 1; i <= 10; i++) {
-            request.setTrayId(i);
-            String itemName = warehouseItems.get(i - 1);
-            request.setName(itemName);
-            warehouseEndpoint.insertItem(request);
-        }
-
-    }
-
-    // Only one @PostConstruct annotated method
-    @PostConstruct
-    public void postConstruct(){
-        pickAll();
-        fillAll();
-    }
-
 
 }

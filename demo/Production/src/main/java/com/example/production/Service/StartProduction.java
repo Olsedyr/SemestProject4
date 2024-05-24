@@ -18,19 +18,8 @@ import java.util.List;
 @Service
 public class StartProduction {
 
-//    State 0: Start med at kør AGV til warehouse (done)
-//    State 1: Ud fra recipe (Valgt i front-end) samle alle delene op (Tray-Id) (Niko)
-//    State 2: AGV kør til assembly station (Kim)
-//    State 3: Sætte delene i assembly station (Kim)
-//    State 4: Assembly station skal samle (Oliver)
-//    State 5: Gem i database “recipe, timestamp, succes” (Oliver)
-
-
-    boolean isFinished = false;
-
     @Autowired
     BatchRepository batchRepository;
-
     @Autowired
     AgvToWarehouse agvToWarehouse;
     @Autowired
@@ -42,18 +31,24 @@ public class StartProduction {
     @Autowired
     AgvPutAssembly agvPutAssembly;
     @Autowired
+    AgvPickAssembly agvPickAssembly;
+    @Autowired
+    AgvPutWarehouse agvPutWarehouse;
+    @Autowired
     SaveToDB saveToDB;
     @Autowired
     AssembleProduct assembleProduct;
-    int state = 0;
+
 
 
     public void startProduction(Product product) {
 
         Batch batch = saveToDB.addBatchToDB(product);
+        boolean isFinished = false;
+        boolean isFailed = false;
+        int state = 0;
 
-
-        while (isFinished == false) {
+        while (!isFinished && !isFailed) {
 
 
             switch (state) {
@@ -64,7 +59,7 @@ public class StartProduction {
                     if (productionStatus0.isCompletedWithoutError() == true) {
                         state++;
                         System.out.println("state 0 finished");
-                    }
+                    } else isFailed = true;
                     break;
                 case 1:
                     agvToCharger.moveAgvToCharger(5, batch);
@@ -74,8 +69,7 @@ public class StartProduction {
                     if (productionStatus1.isCompletedWithoutError() == true) {
                         state++;
                         System.out.println("state 1 finished");
-
-                    }
+                    } else isFailed = true;
                     break;
                 case 2:
                     agvToCharger.moveAgvToCharger(10, batch);
@@ -85,7 +79,7 @@ public class StartProduction {
                     if (productionStatus2.isCompletedWithoutError() == true) {
                         state++;
                         System.out.println("state 2 finished");
-                    }
+                    } else isFailed = true;
                     break;
                 case 3:
                     agvToCharger.moveAgvToCharger(10, batch);
@@ -95,26 +89,45 @@ public class StartProduction {
                     if (productionStatus3.isCompletedWithoutError() == true) {
                         state++;
                         System.out.println("state 3 finished");
-                    }
+                    } else isFailed = true;
                     break;
                 case 4:
-                    agvToCharger.moveAgvToCharger(10, batch);
                     ProductionStatus productionStatus4 = assembleProduct.executeAssemblyProgram(batch);
                     batch.appendToLogNoTimeStamp(productionStatus4.getLog());
                     batchRepository.save(batch);
-                    state++;
-                    System.out.println("state 4 finished");
+                    if (productionStatus4.isCompletedWithoutError() == true) {
+                        state++;
+                        System.out.println("state 4 finished");
+                    } else isFailed = true;
                     break;
                 case 5:
+                    agvToCharger.moveAgvToCharger(5, batch);
+                    ProductionStatus productionStatus5 = agvPickAssembly.agvPickAssembly(product);
+                    batch.appendToLogNoTimeStamp(productionStatus5.getLog());
+                    batchRepository.save(batch);
+                    if (productionStatus5.isCompletedWithoutError() == true) {
+                        state++;
+                        System.out.println("state 5 finished");
+                    } else isFailed = true;
+                    break;
+                case 6:
+                    agvToCharger.moveAgvToCharger(5, batch); // move to charger if battery is less than 50 %
+                    ProductionStatus productionStatus6 = agvToWarehouse.moveAgvToWarehouse();
+                    batch.appendToLogNoTimeStamp(productionStatus6.getLog());
+                    if (productionStatus6.isCompletedWithoutError() == true) {
+                        state++;
+                        System.out.println("state 6 finished");
+                    } else isFailed = true;
+                    break;
+                case 7:
                     isFinished = true;
-                    System.out.println("state 5 finished");
+                    System.out.println("state 7 finished");
                     System.out.println("Production done");
                     batch.setCompleted(true);
                     agvToCharger.moveAgvToCharger(50, batch);
+
                     break;
             }
         }
-        state = 0;
-        isFinished = false;
     }
 }
