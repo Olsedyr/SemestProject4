@@ -12,7 +12,6 @@ public class Product {
     private Long id;
     private String name;
     @OneToOne(optional = true)
-    @JsonManagedReference
     private Recipe recipe;
     @Column(nullable = true,length = 1_000)
     private String description;

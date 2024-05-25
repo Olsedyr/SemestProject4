@@ -11,13 +11,13 @@ VALUES ('Small Wheel', 1, 'Wheel used for small skateboard'),
        ('Large Board', 9, 'Board used for large skateboard'),
        ('Wheel Bearing', 10, 'Bearing used in skateboard wheels');
 
--- Insert recipes and link them to the product IDs
+-- Insert recipes
 INSERT INTO recipe (product_name)
 VALUES ('Small skateboard'),
        ('Medium skateboard'),
        ('Large skateboard');
 
--- Insert products with no recipes
+-- Insert products and link them to recipe IDs
 INSERT INTO product (name, description,recipe_id)
 VALUES ('Small skateboard', 'A small-sized skateboard suitable for children',1),
        ('Medium skateboard', 'A medium-sized skateboard',2),

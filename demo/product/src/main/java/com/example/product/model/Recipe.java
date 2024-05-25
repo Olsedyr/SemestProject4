@@ -13,9 +13,6 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @OneToOne(optional = true)
-//    @JsonBackReference
-//    private Product product;
     private String productName;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -29,14 +26,6 @@ public class Recipe {
 
     public Recipe() {
     }
-
-//    public Product getProduct() {
-//        return product;
-//    }
-//
-//    public void setProduct(Product product) {
-//        this.product = product;
-//    }
 
     public List<RecipePart> getRecipeParts() {
         return recipeParts;
