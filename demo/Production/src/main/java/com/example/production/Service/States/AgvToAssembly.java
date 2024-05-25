@@ -16,9 +16,10 @@ public class AgvToAssembly {
 
     @Autowired
     BatchRepository batchRepository;
-    ProductionStatus productionStatus = new ProductionStatus(false);
+
 
     public ProductionStatus moveAgvToAssembly() {
+        ProductionStatus productionStatus = new ProductionStatus(false);
         agvConnection.setProgram(AgvPrograms.MoveToAssemblyOperation);
         agvConnection.startProgram();
         System.out.println("Program started: Move AVG to Assembly Station");

@@ -18,10 +18,11 @@ public class AgvToWarehouse {
 
     @Autowired
     BatchRepository batchRepository;
-    ProductionStatus productionStatus = new ProductionStatus(false);
+
 
     @Transactional
     public ProductionStatus moveAgvToWarehouse() {
+        ProductionStatus productionStatus = new ProductionStatus(false);
         agvConnection.setProgram(AgvPrograms.MoveToStorageOperation);
         agvConnection.startProgram();
         System.out.println("Program started: Move AVG to Warehouse");

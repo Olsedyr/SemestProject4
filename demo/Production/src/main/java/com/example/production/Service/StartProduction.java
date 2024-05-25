@@ -120,8 +120,17 @@ public class StartProduction {
                     } else isFailed = true;
                     break;
                 case 7:
+                    agvToCharger.moveAgvToCharger(5, batch); // move to charger if battery is less than 50 %
+                    ProductionStatus productionStatus7 = agvPutWarehouse.agvPutWarehouse(product);
+                    batch.appendToLogNoTimeStamp(productionStatus7.getLog());
+                    if (productionStatus7.isCompletedWithoutError() == true) {
+                        state++;
+                        System.out.println("state 7 finished");
+                    } else isFailed = true;
+                    break;
+                case 8:
                     isFinished = true;
-                    System.out.println("state 7 finished");
+                    System.out.println("state 8 finished");
                     System.out.println("Production done");
                     batch.setCompleted(true);
                     agvToCharger.moveAgvToCharger(50, batch);

@@ -22,14 +22,14 @@ public class AgvPickAssembly {
     @Autowired
     IWarehouseService warehouseService;
 
-    ProductionStatus productionStatus = new ProductionStatus(false);
+
 
     public AgvPickAssembly() {
     }
 
     public ProductionStatus agvPickAssembly(Product product) {
 
-
+        ProductionStatus productionStatus = new ProductionStatus(false);
         agvConnection.setProgram(AgvPrograms.PickAssemblyOperation);
         agvConnection.startProgram();
         System.out.println("Starting picking operation for " + product.getName() + " at the assembly station");

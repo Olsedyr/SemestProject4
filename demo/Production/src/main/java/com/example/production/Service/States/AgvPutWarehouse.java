@@ -19,12 +19,12 @@ public class AgvPutWarehouse {
     @Autowired
     IAgvConnectionService agvConnection;
 
-    ProductionStatus productionStatus = new ProductionStatus(false);
+
 
 
     public ProductionStatus agvPutWarehouse(Product product) {
 
-
+        ProductionStatus productionStatus = new ProductionStatus(false);
         agvConnection.setProgram(AgvPrograms.PutWarehouseOperation);
         agvConnection.startProgram();
         System.out.println("Starting offloading operation of " + product.getName() + " at Warehouse");
