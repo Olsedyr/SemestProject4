@@ -7,57 +7,56 @@ import com.example.product.repository.PartRepository;
 import com.example.product.repository.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class RecipeServiceTest {
 
     @Mock
-    private RecipeRepository recipeRepositoryMock;
+    private RecipeRepository recipeRepository;
 
     @Mock
-    private PartRepository partRepositoryMock;
+    private PartRepository partRepository;
 
-    @InjectMocks
     private RecipeService recipeService;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
+        recipeService = new RecipeService(recipeRepository, partRepository);
+        // Setup to avoid null return
+        Recipe mockRecipe = new Recipe();
+        mockRecipe.setProductName("Test Product");  // Assume constructor or setter initializes necessary fields
+        when(recipeRepository.save(any(Recipe.class))).thenReturn(mockRecipe);  // Ensure non-null response
     }
 
     @Test
     public void testAddRecipe() {
-        String productName = "TestProduct";
+        String productName = "Test Product";
         Map<String, Integer> partQuantities = new HashMap<>();
         partQuantities.put("Part1", 5);
         partQuantities.put("Part2", 10);
 
-        Map<String, String> partDescriptions = new HashMap<>();
-        partDescriptions.put("Part1", "Description for Part1");
-        partDescriptions.put("Part2", "Description for Part2");
+        // Mock part repository behavior
+        when(partRepository.findByName("Part1")).thenReturn(Optional.empty());
+        when(partRepository.findByName("Part2")).thenReturn(Optional.empty());
 
-        Part part1 = new Part("Part1");
-        Part part2 = new Part("Part2");
+        // Invoke the method under test
+        Recipe result = recipeService.addRecipe(productName, partQuantities, new HashMap<>());
 
-        when(partRepositoryMock.findByName("Part1")).thenReturn(Optional.of(part1));
-        when(partRepositoryMock.findByName("Part2")).thenReturn(Optional.of(part2));
-
-        Recipe savedRecipe = new Recipe();
-
-
-        when(recipeRepositoryMock.save(any(Recipe.class))).thenReturn(savedRecipe);
-
-        Recipe addedRecipe = recipeService.addRecipe(productName, partQuantities, partDescriptions);
-
-        verify(recipeRepositoryMock, times(1)).save(any(Recipe.class));
-        verify(partRepositoryMock, times(2)).findByName(anyString());
-
-        // Add your assertions here based on the behavior of the service method
+        // Verify interactions and assertions
+        verify(recipeRepository, times(1)).save(any(Recipe.class));
+        verify(partRepository, times(2)).findByName(anyString());
+        verify(partRepository, times(2)).save(any(Part.class));
+        assertEquals(productName, result.getProductName());
+        assertEquals(2, result.getRecipeParts().size());
     }
+
 }

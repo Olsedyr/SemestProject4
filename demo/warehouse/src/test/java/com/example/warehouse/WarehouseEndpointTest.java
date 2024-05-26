@@ -1,5 +1,6 @@
 package com.example.warehouse;
 
+import com.example.warehouse.endpoint.WarehouseEndpoint;
 import com.example.warehouse.warehouse.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

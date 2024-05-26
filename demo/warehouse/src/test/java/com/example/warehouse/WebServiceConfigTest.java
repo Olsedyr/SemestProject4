@@ -1,5 +1,6 @@
 package com.example.warehouse;
 
+import com.example.warehouse.config.WebServiceConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
