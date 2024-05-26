@@ -1,64 +1,46 @@
 package com.example.agv;
 
-import com.example.agv.AgvController;
 
-import com.example.agv.agvConnection.AgvConnection;
-import com.example.agv.agvConnection.AgvPrograms;
 import com.example.agv.agvConnection.AgvStatus;
-import org.springframework.web.bind.annotation.*;
+import com.example.agv.agvConnection.AgvConnection;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@RestController
-@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/agv")
+import static org.mockito.Mockito.when;
+
+@SpringBootTest
+@AutoConfigureMockMvc
 public class AgvControllerTest {
 
-    private final AgvConnection agvConnection = AgvConnection.getInstance();
+    @Mock
+    private AgvConnection agvConnection;
 
-    @PutMapping("/program/move-to-charger")
-    public void moveToChargerProgram() {
-        agvConnection.setProgram(AgvPrograms.MoveToChargerOperation);
-        agvConnection.startProgram();
+    @InjectMocks
+    private AgvController agvController;
+
+    @BeforeEach
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
     }
 
-    @PutMapping("/program/move-to-assembly")
-    public void moveToAssemblyProgram() {
-        agvConnection.setProgram(AgvPrograms.MoveToAssemblyOperation);
-        agvConnection.startProgram();
-    }
+    @Test
+    public void testMoveToChargerProgram() throws Exception {
+        // Arrange
+        when(agvConnection.getAgvStatus()).thenReturn(new AgvStatus()); // Mocking the response
 
-    @PutMapping("/program/move-to-storage")
-    public void moveToStorageProgram() {
-        agvConnection.setProgram(AgvPrograms.MoveToStorageOperation);
-        agvConnection.startProgram();
-    }
-
-    @PutMapping("/program/put-assembly")
-    public void putAssemblyProgram() {
-        agvConnection.setProgram(AgvPrograms.PutAssemblyOperation);
-        agvConnection.startProgram();
-    }
-
-    @PutMapping("/program/pick-assembly")
-    public void pickAssemblyProgram() {
-        agvConnection.setProgram(AgvPrograms.PickAssemblyOperation);
-        agvConnection.startProgram();
-    }
-
-    @PutMapping("/program/pick-warehouse")
-    public void pickWarehouseProgram() {
-        agvConnection.setProgram(AgvPrograms.PickWarehouseOperation);
-        agvConnection.startProgram();
-    }
-
-    @PutMapping("/program/put-warehouse")
-    public void putWarehouseProgram() {
-        agvConnection.setProgram(AgvPrograms.PutWarehouseOperation);
-        agvConnection.startProgram();
+        // Act & Assert
+        MockMvc mockMvc = null; // Initialize your MockMvc instance here
+        mockMvc.perform(MockMvcRequestBuilders.put("/agv/program/move-to-charger"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
 
-    @GetMapping("/status")
-    public AgvStatus getAgvStatus() {
-        return agvConnection.getAgvStatus();
-    }
 }

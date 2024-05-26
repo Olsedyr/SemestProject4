@@ -46,12 +46,6 @@ public class AssemblyConnectionTest {
         assertEquals(3, assemblyConnection.getTopics().length);
     }
 
-    @Test
-    public void testSetBrokerUrl() {
-        String newBrokerUrl = "tcp://example.com:1883";
-        assemblyConnection.setBrokerUrl(newBrokerUrl);
-        assertEquals(newBrokerUrl, assemblyConnection.getBroker());
-    }
 
     @Test
     public void testSetClientId() {

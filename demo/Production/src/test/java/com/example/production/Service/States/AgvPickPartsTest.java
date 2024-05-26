@@ -17,7 +17,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@SpringBootTest(classes = AgvPickParts.class)
 class AgvPickPartsTest {
 
     private AgvPickParts agvPickParts;
