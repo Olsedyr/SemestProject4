@@ -2,11 +2,11 @@ package com.example.production.Service.States;
 
 import com.example.assembly.AssemblyRequests;
 import com.example.assembly.AssemblyStatus;
+import com.example.assembly.IAssemblyService;
 import com.example.product.model.Batch;
 import com.example.production.ProductionStatus;
-import com.example.production.Service.ProductionStates;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -14,12 +14,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 // State 4
 
 @Service
-public class AssembleProduct extends ProductionStates {
+public class AssembleProduct {
 
+    @Autowired
+    IAssemblyService assemblyRequests;
 
     public ProductionStatus executeAssemblyProgram(Batch batch) {
         ProductionStatus productionStatus = new ProductionStatus(false);
-        AssemblyRequests assemblyRequests = new AssemblyRequests();
+
         CountDownLatch latch = new CountDownLatch(2); // Two conditions to be met for success
         AtomicBoolean isAssemblyStatusMet = new AtomicBoolean(false); // Atomic to handle concurrency safely
         AtomicBoolean isHealthStatusMet = new AtomicBoolean(false);
@@ -52,8 +54,8 @@ public class AssembleProduct extends ProductionStates {
         System.out.println("Assembly program started with ProcessID: " + batch.getId());
         productionStatus.appendToLog("Assembly program started with ProcessID: " + batch.getId());
 
-        assemblyRequests.getHealthCheck(callback);
-        assemblyRequests.getStatus(callback);
+        assemblyRequests.subscribeToHealthCheck(callback);
+        assemblyRequests.subscribeToStatus(callback);
 
         try {
             // Wait for the latch to be decremented twice, or timeout after 20 seconds
@@ -75,8 +77,8 @@ public class AssembleProduct extends ProductionStates {
         }
 
         // Unsubscribe from topics
-        assemblyRequests.unsubscribeHealthCheck();
-        assemblyRequests.unsubscribeStatus();
+        assemblyRequests.unsubscribeFromHealthCheck();
+        assemblyRequests.unsubscribeFromStatus();
 
         return productionStatus;
     }

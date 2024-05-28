@@ -34,7 +34,7 @@ public class ProductService {
         product.setName(name);
         product.setDescription(description);
         product.setRecipe(recipe);
-//        recipe.setProduct(product);
+
         recipeRepository.save(recipe);
 
         // Save the product to the database

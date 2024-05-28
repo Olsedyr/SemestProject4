@@ -1,27 +1,28 @@
 package com.example.production.Service.States;
 
-import com.example.agv.agvConnection.AgvConnection;
 import com.example.agv.agvConnection.AgvPrograms;
 import com.example.agv.agvConnection.AgvStatus;
-import com.example.product.model.Batch;
+import com.example.agv.agvConnection.IAgvConnectionService;
 import com.example.product.repository.BatchRepository;
 import com.example.production.ProductionStatus;
-import com.example.production.Service.ProductionStates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-// State 0
+// State 0 and 6
 @Service
-public class AgvToWarehouse extends ProductionStates {
+public class AgvToWarehouse {
+    @Autowired
+    IAgvConnectionService agvConnection;
 
-    AgvConnection agvConnection = AgvConnection.getInstance();
+
     @Autowired
     BatchRepository batchRepository;
-    ProductionStatus productionStatus = new ProductionStatus(false);
+
 
     @Transactional
     public ProductionStatus moveAgvToWarehouse() {
+        ProductionStatus productionStatus = new ProductionStatus(false);
         agvConnection.setProgram(AgvPrograms.MoveToStorageOperation);
         agvConnection.startProgram();
         System.out.println("Program started: Move AVG to Warehouse");

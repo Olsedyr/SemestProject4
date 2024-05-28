@@ -37,13 +37,14 @@ public class AssemblyRequests {
 
     public interface StatusCallback {
         void onStatusReceived(AssemblyStatus status);
+
         void onHealthReceived(String health);
     }
 
 
     public void executeProgram(Long processId) {
 
-        String payload = "{\"ProcessID\": "+processId+"}";
+        String payload = "{\"ProcessID\": " + processId + "}";
         MqttMessage mqttMessage = new MqttMessage(payload.getBytes());
         mqttMessage.setQos(2); // Quality of Service (QoS): 2 = exactly once
 
@@ -91,8 +92,6 @@ public class AssemblyRequests {
             return null;
         }
     }
-
-
 
 
     // for testing

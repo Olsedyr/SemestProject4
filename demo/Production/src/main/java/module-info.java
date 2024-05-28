@@ -1,4 +1,5 @@
 module Production {
+    uses com.example.agv.agvConnection.IAgvConnectionService;
     requires assembly.module;
     requires agv.module;
     requires warehouse.module;

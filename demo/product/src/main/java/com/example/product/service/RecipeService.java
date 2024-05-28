@@ -26,44 +26,6 @@ public class RecipeService {
 
 
 
-//    @Transactional
-//    public Recipe addRecipe(String productName, Map<String, Integer> partQuantities) {
-//        List<RecipePart> recipeParts = new ArrayList<>();
-//
-//        Recipe recipe = new Recipe();
-//        recipe.setProductName(productName);
-//        recipe = recipeRepository.save(recipe);
-//
-//        // Iterate over each part
-//        for (Map.Entry<String, Integer> entry : partQuantities.entrySet()) {
-//            String partName = entry.getKey();
-//            int quantity = entry.getValue();
-//
-//            // Check if the part exists in the database
-//            Optional<Part> optionalPart = partRepository.findByName(partName);
-//
-//            // If the part doesn't exist, create and save it
-//            Part part;
-//            if (optionalPart.isEmpty()) {
-//                part = new Part(partName);
-//                part = partRepository.save(part);
-//            } else {
-//                part = optionalPart.get();
-//            }
-//
-//            // Create a RecipePart for this part with the specified quantity
-//            RecipePart recipePart = new RecipePart();
-//            recipePart.setPart(part);
-//            recipePart.setQuantity(quantity);
-//            recipePart.setRecipe(recipe);
-//            recipeParts.add(recipePart);
-//        }
-//
-//        // Set the recipe parts for the recipe
-//        recipe.setRecipeParts(recipeParts);
-//        return recipe;
-//    }
-
     @Transactional
     public Recipe addRecipe(String productName, Map<String, Integer> partQuantities, Map<String, String> partDescriptions) {
         List<RecipePart> recipeParts = new ArrayList<>();

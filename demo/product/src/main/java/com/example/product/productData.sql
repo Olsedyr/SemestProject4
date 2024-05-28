@@ -11,19 +11,21 @@ VALUES ('Small Wheel', 1, 'Wheel used for small skateboard'),
        ('Large Board', 9, 'Board used for large skateboard'),
        ('Wheel Bearing', 10, 'Bearing used in skateboard wheels');
 
--- Insert products with no recipes
-INSERT INTO product (name, description)
-VALUES ('Small skateboard', 'A small-sized skateboard suitable for children'),
-       ('Medium skateboard', 'A medium-sized skateboard'),
-       ('Large skateboard', 'A large-sized skateboard')
-RETURNING id;
+-- Insert recipes
+INSERT INTO recipe (product_name)
+VALUES ('Small skateboard'),
+       ('Medium skateboard'),
+       ('Large skateboard');
+
+-- Insert products and link them to recipe IDs
+INSERT INTO product (name, description,recipe_id)
+VALUES ('Small skateboard', 'A small-sized skateboard suitable for children',1),
+       ('Medium skateboard', 'A medium-sized skateboard',2),
+       ('Large skateboard', 'A large-sized skateboard',3);
 
 
--- Insert recipes and link them to the product IDs
-INSERT INTO recipe (product_name, product_id)
-VALUES ('Small skateboard', 1),
-       ('Medium skateboard', 2),
-       ('Large skateboard', 3);
+
+
 
 -- Insert recipe parts
 INSERT INTO recipe_part (recipe_id, part_id, quantity)
@@ -39,15 +41,3 @@ VALUES (1, 1, 4),  -- 4 Small Wheels for a Small skateboard
        (3, 8, 2),  -- 2 Large Trucks for a Large skateboard
        (3, 9, 1),  -- 1 Large Board for a Large skateboard
        (3, 10, 8); -- 8 Wheel Bearings for a Large skateboard
-
-
--- Update products to link them to their recipes
-UPDATE product
-SET recipe_id = 1
-WHERE id = 1;
-UPDATE product
-SET recipe_id = 2
-WHERE id = 2;
-UPDATE product
-SET recipe_id = 3
-WHERE id = 3;

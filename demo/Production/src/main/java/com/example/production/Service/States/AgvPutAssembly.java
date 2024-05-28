@@ -1,28 +1,28 @@
 package com.example.production.Service.States;
 
-import com.example.agv.agvConnection.AgvConnection;
 import com.example.agv.agvConnection.AgvPrograms;
 import com.example.agv.agvConnection.AgvStatus;
-import com.example.product.model.Batch;
+import com.example.agv.agvConnection.IAgvConnectionService;
 import com.example.product.model.Part;
 import com.example.product.model.Product;
 import com.example.product.model.RecipePart;
 import com.example.product.repository.BatchRepository;
 import com.example.production.ProductionStatus;
-import com.example.production.Service.ProductionStates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
+
 // State 3
 @Service
-public class AgvPutAssembly extends ProductionStates {
+public class AgvPutAssembly {
 
     @Autowired
     BatchRepository batchRepository;
-    AgvConnection agvConnection = AgvConnection.getInstance();
+    @Autowired
+    IAgvConnectionService agvConnection;
+
     ProductionStatus productionStatus = new ProductionStatus(false);
 
     public List<Part> getPartList(Product product) {
@@ -43,6 +43,7 @@ public class AgvPutAssembly extends ProductionStates {
 
     public ProductionStatus agvPutPart(List<Part> partList) {
         for (Part part : partList) {
+
             agvConnection.setProgram(AgvPrograms.PutAssemblyOperation);
             agvConnection.startProgram();
             System.out.println("Starting offloading operation of " + part.getName());
@@ -65,7 +66,7 @@ public class AgvPutAssembly extends ProductionStates {
                 try {
                     Thread.sleep(1000); // Sleep for 1 second before checking again
                 } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();  // Restore the interrupted status
+                    Thread.currentThread().interrupt();
                     productionStatus.setCompletedWithoutError(false);
                     return productionStatus;  // Exit if the thread is interrupted
                 }
@@ -73,8 +74,8 @@ public class AgvPutAssembly extends ProductionStates {
             }
 
             if (!partPlaced) {
-                System.out.println("Part_" + part.getName() + " not placed at Assembly Station. Operation failed.");
-                productionStatus.appendToLog("Part_" + part.getName() + " not placed at Assembly Station. Operation failed.");
+                System.out.println("Part " + part.getName() + " not placed at Assembly Station. Operation failed.");
+                productionStatus.appendToLog("Part " + part.getName() + " not placed at Assembly Station. Operation failed.");
                 productionStatus.setCompletedWithoutError(false);
                 return productionStatus;
             }
@@ -83,4 +84,5 @@ public class AgvPutAssembly extends ProductionStates {
         productionStatus.setCompletedWithoutError(true);
         return productionStatus;  // All parts were placed successfully
     }
+
 }

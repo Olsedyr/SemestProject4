@@ -1,20 +1,22 @@
 package com.example.production.Service.States;
 
-import com.example.agv.agvConnection.AgvConnection;
 import com.example.agv.agvConnection.AgvPrograms;
 import com.example.agv.agvConnection.AgvStatus;
+import com.example.agv.agvConnection.IAgvConnectionService;
 import com.example.product.model.Batch;
 import com.example.product.repository.BatchRepository;
 import com.example.production.ProductionStatus;
-import com.example.production.Service.ProductionStates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 // State 0
 @Service
-public class AgvToCharger extends ProductionStates {
+public class AgvToCharger {
 
-    AgvConnection agvConnection = AgvConnection.getInstance();
+    @Autowired
+    IAgvConnectionService agvConnection;
+
+
     @Autowired
     BatchRepository batchRepository;
 
