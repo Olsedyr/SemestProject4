@@ -11,7 +11,14 @@ public class AssemblyRequests {
     MqttClient client = connection.getClient();
 
 
+
     public AssemblyStatus getStatus() {
+        String[] topics = connection.getTopics();
+        if (topics == null || topics.length == 0) {
+            // Handle the case when topics are null or empty
+            System.err.println("No topics available for subscription.");
+            return null;
+        }
         try {
             // Subscribe to the MQTT topic where status messages are published
             client.subscribe(connection.getTopics()[1], new IMqttMessageListener() {

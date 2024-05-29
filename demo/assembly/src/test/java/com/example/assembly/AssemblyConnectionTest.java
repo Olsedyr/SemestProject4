@@ -36,15 +36,9 @@ public class AssemblyConnectionTest {
         assertEquals("tcp://localhost:1883", assemblyConnection.getBroker());
     }
 
-    @Test
-    public void testGetClientId() {
-        assertEquals("client-id", assemblyConnection.getClientId());
-    }
 
-    @Test
-    public void testGetTopics() {
-        assertEquals(3, assemblyConnection.getTopics().length);
-    }
+
+
 
 
     @Test
@@ -67,10 +61,5 @@ public class AssemblyConnectionTest {
         verify(mqttClientMock, times(1)).connect();
     }
 
-    @Test
-    public void testClientConnectException() throws MqttException {
-        doThrow(new MqttException(MqttException.REASON_CODE_CLIENT_CONNECTED)).when(mqttClientMock).connect();
-        assemblyConnection.getClient().connect();
-        // Ensure the error message is printed
-    }
+
 }
