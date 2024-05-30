@@ -33,7 +33,7 @@
       <module name="agv" options="-parameters" />
       <module name="assembly" options="-parameters" />
       <module name="demo" options="-parameters" />
-      <module name="main-app" options="-parameters" />
+      <module name="main-app" options="" />
       <module name="product" options="-parameters" />
       <module name="warehouse" options="-parameters" />
     </option>

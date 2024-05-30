@@ -37,10 +37,10 @@ public class ProductionController {
     InventoryRepository inventoryRepository;
 
     @Autowired
-    private WarehouseEndpoint warehouseEndpoint;
+    protected WarehouseEndpoint warehouseEndpoint;
 
     @Autowired
-    private WarehouseController warehouseController;
+    protected WarehouseController warehouseController;
 
     @Autowired
     StartProduction startProduction;
