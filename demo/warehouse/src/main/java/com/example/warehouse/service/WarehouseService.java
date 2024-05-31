@@ -52,9 +52,9 @@ public class WarehouseService implements IWarehouseService {
 
         InsertItem request = new InsertItem();
 
-        for (int i = 1; i < parts.size(); i++) {
+        for (int i = 0; i < parts.size(); i++) {
             Part part = parts.get(i);
-            request.setTrayId(i);
+            request.setTrayId(i+1);
             request.setName(part.getName());
             warehouseEndpoint.insertItem(request);
         }
